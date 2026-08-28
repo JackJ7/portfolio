@@ -1,0 +1,321 @@
+/* ==========================================================================
+   Datasheet stylesheet — shared by every page (00–05).
+   System: paper-white vellum, abyssal-teal ink, safety-amber accent,
+   JetBrains Mono throughout. Print-to-PDF is a first-class target.
+   ========================================================================== */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --paper: #f9f9f6;
+  --grid-line: rgba(16, 63, 69, 0.07);
+  --ink: #103f45;        /* abyssal teal, text weight */
+  --ink-deep: #082b30;   /* headings, doc numbers */
+  --ink-mid: #4a7379;    /* labels, secondary text */
+  --rule: #b8c9c7;       /* hairline rules */
+  --rule-strong: #103f45;
+  --amber: #e39b00;      /* safety amber — measured results, rev block */
+  --amber-deep: #9a6a00; /* amber legible at text size on paper */
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.sheet {
+  max-width: 960px;
+  margin: 32px auto 48px;
+  padding: 0 20px;
+}
+
+a { color: var(--ink); text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { color: var(--amber-deep); }
+a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+/* --------------------------------------------------------------------------
+   Document header: doc number | title block | revision
+   -------------------------------------------------------------------------- */
+
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--rule-strong);
+}
+
+.doc-id {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-mid);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.doc-title h1 {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--ink-deep);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.doc-title .subtitle {
+  font-size: 12px;
+  color: var(--ink-mid);
+  margin-top: 4px;
+}
+
+.doc-rev {
+  font-size: 11px;
+  text-align: right;
+  color: var(--ink-mid);
+  white-space: nowrap;
+}
+.doc-rev .rev-letter {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--ink-deep);
+  border: 2px solid var(--amber);
+  padding: 1px 8px;
+  margin-bottom: 4px;
+}
+
+.doc-nav {
+  display: flex;
+  gap: 18px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+.doc-nav a { text-decoration: none; color: var(--ink-mid); }
+.doc-nav a:hover, .doc-nav a[aria-current="page"] { color: var(--ink-deep); }
+.doc-nav a[aria-current="page"] { font-weight: 700; border-bottom: 2px solid var(--amber); }
+
+/* --------------------------------------------------------------------------
+   Two-column body: prose sections + spec rail
+   -------------------------------------------------------------------------- */
+
+.doc-body {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 0 32px;
+  margin-top: 24px;
+}
+
+.prose { min-width: 0; }
+
+section { margin-bottom: 26px; }
+
+section h2 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-deep);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+}
+section h2 .sec-no { color: var(--ink-mid); margin-right: 10px; }
+
+section p { margin-bottom: 10px; }
+section p:last-child { margin-bottom: 0; }
+
+section ul { margin: 0 0 10px 18px; }
+section li { margin-bottom: 5px; }
+
+em { font-style: italic; }
+strong { font-weight: 700; color: var(--ink-deep); }
+
+/* Spec rail */
+.spec-rail { font-size: 12px; }
+
+.spec-block {
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--rule-strong);
+  margin-bottom: 18px;
+  background: rgba(255, 255, 255, 0.55);
+}
+.spec-block h3 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-deep);
+  padding: 7px 10px 5px;
+  border-bottom: 1px solid var(--rule);
+}
+.spec-block dl { padding: 4px 10px 8px; }
+.spec-block .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 3px 0;
+  border-bottom: 1px dotted var(--rule);
+}
+.spec-block .row:last-child { border-bottom: none; }
+.spec-block dt { color: var(--ink-mid); flex-shrink: 0; }
+.spec-block dd { text-align: right; font-weight: 700; overflow-wrap: anywhere; }
+
+/* Measured result — the amber moment. Used only for verified numbers. */
+.measured {
+  border: 1px solid var(--amber);
+  border-left: 6px solid var(--amber);
+  padding: 10px 12px;
+  margin-bottom: 18px;
+  background: rgba(227, 155, 0, 0.06);
+}
+.measured .label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber-deep);
+}
+.measured .value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink-deep);
+  line-height: 1.3;
+}
+.measured .note { font-size: 11px; color: var(--ink-mid); }
+
+/* Known limitations — deliberate, high-signal. Never soften. */
+.limitations {
+  border: 1px solid var(--rule-strong);
+}
+.limitations h2 {
+  background: var(--ink-deep);
+  color: var(--paper);
+  border-bottom: none;
+  padding: 6px 12px;
+  margin-bottom: 0;
+}
+.limitations h2 .sec-no { color: var(--amber); }
+.limitations ul { margin: 0; padding: 10px 12px 10px 30px; }
+
+/* Data tables (capability matrix, index table) */
+table { border-collapse: collapse; width: 100%; font-size: 12px; }
+th, td { border: 1px solid var(--rule); padding: 6px 9px; text-align: left; vertical-align: top; }
+th {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-deep);
+  background: rgba(16, 63, 69, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   Title block footer — engineering-drawing style
+   -------------------------------------------------------------------------- */
+
+.title-block {
+  margin-top: 36px;
+  border: 2px solid var(--rule-strong);
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  font-size: 10px;
+}
+.title-block .cell {
+  border-right: 1px solid var(--rule-strong);
+  padding: 5px 9px 6px;
+}
+.title-block .cell:last-child { border-right: none; }
+.title-block .cell .k {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+.title-block .cell .v { font-weight: 700; color: var(--ink-deep); }
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 720px) {
+  body { font-size: 12.5px; }
+  .sheet { margin-top: 16px; padding: 0 12px; }
+  .doc-header { flex-wrap: wrap; align-items: baseline; }
+  .doc-title { order: -1; flex-basis: 100%; }
+  .doc-title h1 { font-size: 24px; }
+  .doc-body { grid-template-columns: 1fr; }
+  .spec-rail { order: -1; margin-bottom: 8px; }
+  .title-block { grid-template-columns: 1fr 1fr; }
+  .title-block .cell { border-bottom: 1px solid var(--rule-strong); }
+  .title-block .cell:nth-child(2n) { border-right: none; }
+  .title-block .cell:nth-last-child(-n+2) { border-bottom: none; }
+  table { display: block; overflow-x: auto; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a { transition: color 120ms ease; }
+}
+
+/* --------------------------------------------------------------------------
+   Print — hard requirement. Ink on paper, no nav, no background grid.
+   -------------------------------------------------------------------------- */
+
+@page { margin: 14mm 12mm; }
+
+@media print {
+  body { background: #fff; font-size: 11px; }
+  .sheet { max-width: none; margin: 0; padding: 0; }
+  .doc-nav { display: none; }
+  section, .spec-block, .measured, .title-block { break-inside: avoid; }
+  .spec-block { background: none; }
+  .measured { background: none; }
+  .limitations h2 {
+    background: none;
+    color: var(--ink-deep);
+    border-bottom: 2px solid var(--ink-deep);
+    padding: 6px 0;
+  }
+  .limitations { border-color: var(--ink-deep); }
+  a { text-decoration: none; color: inherit; }
+}

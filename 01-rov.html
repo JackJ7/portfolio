@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROV — Crush Depth · J. O. Jackson</title>
+<meta name="description" content="Crush Depth ROV: underwater remotely operated vehicle for the MATE ROV World Championship. Custom manipulator, printed chassis and housings, pilot-first control architecture.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="sheet">
+
+  <header class="doc-header">
+    <div class="doc-id">DS-01</div>
+    <div class="doc-title">
+      <h1>ROV — CRUSH DEPTH</h1>
+      <p class="subtitle">Underwater remotely operated vehicle — MATE ROV World Championship</p>
+    </div>
+    <div class="doc-rev">
+      <span class="rev-letter">REV A</span><br>
+      2026-08-27
+    </div>
+  </header>
+
+  <nav class="doc-nav" aria-label="Datasheet index">
+    <a href="index.html">INDEX</a>
+    <a href="01-rov.html" aria-current="page">01 ROV</a>
+    <a href="02-perry.html">02 PERRY</a>
+  </nav>
+
+  <div class="doc-body">
+    <div class="prose">
+
+      <section>
+        <h2><span class="sec-no">1</span>OVERVIEW</h2>
+        <p>Crush Depth's ROV is an underwater remotely operated vehicle built for
+        the MATE ROV competition, where it performs simulated environmental
+        research and industrial inspection tasks. The team — roughly 47 members
+        of Clovis Community College's Engineering Renaissance Club — competed at
+        the MATE ROV World Championship in 2025 and 2026.</p>
+      </section>
+
+      <section>
+        <h2><span class="sec-no">2</span>MECHANICAL DESIGN</h2>
+        <p>The vehicle's structure is custom, printed FDM on Bambu Lab machines
+        and modeled in SolidWorks: an outer chassis, an internal housing that
+        carries the electronics stack, and a TPU foam ballast printed to shape.
+        A custom manipulator, designed against the competition's mission tasks,
+        is the vehicle's working end.</p>
+        <p>Waterproofing is handled as a vehicle-level strategy rather than a
+        per-part fix — every penetration, housing, and connector has to hold at
+        mission depth for the vehicle to score at all.</p>
+      </section>
+
+      <section>
+        <h2><span class="sec-no">3</span>ELECTRONICS &amp; POWER</h2>
+        <p>A Raspberry Pi 5 is the vehicle computer, driving thrusters through
+        ESCs via a PCA9685 PWM driver, with an MPU6050 IMU for attitude sensing
+        and camera systems for the pilot. Power distribution runs through
+        multiple buck converters stepping the tether supply down to the rails
+        the electronics need.</p>
+      </section>
+
+      <section>
+        <h2><span class="sec-no">4</span>CONTROL SOFTWARE</h2>
+        <p>The control architecture (C++) is designed around pilot ergonomics:
+        the layout of controls and behaviors is chosen for ease of piloting
+        under mission time pressure, rather than for a clean mapping to
+        actuators. Mission scores depend on what the pilot can actually execute.</p>
+      </section>
+
+      <section>
+        <h2><span class="sec-no">5</span>ROLE &amp; ATTRIBUTION</h2>
+        <p>The author is Co-CEO / CTO of Crush Depth, co-managing the team with
+        Luke Salazar, and owns the electrical and software domains — promoted
+        from Float Team Technical Lead. Operations at this scale are their own
+        engineering problem: Gantt scheduling, BOM management, and a leadership
+        structure deliberately modeled on a company per MATE guidelines.</p>
+        <p>At the 2026 World Championship the author won the
+        <strong>Engineering Presentation MVP</strong> award.</p>
+      </section>
+
+      <section class="limitations">
+        <h2><span class="sec-no">6</span>KNOWN LIMITATIONS</h2>
+        <ul>
+          <li>The vehicle's total power budget was never formally characterized;
+          converter sizing was validated by operation, not analysis.</li>
+          <li>Manipulator payload capacity is unquantified.</li>
+          <li>The hardware is currently not accessible to the author; figures on
+          this sheet are limited to what was documented at build time.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <aside class="spec-rail">
+      <div class="measured">
+        <span class="label">Competition record</span>
+        <div class="value">MATE Worlds 2025 · 2026</div>
+        <span class="note">Engineering Presentation MVP, 2026</span>
+      </div>
+
+      <div class="spec-block">
+        <h3>Mechanical</h3>
+        <dl>
+          <div class="row"><dt>CAD</dt><dd>SolidWorks</dd></div>
+          <div class="row"><dt>Process</dt><dd>FDM, Bambu Lab</dd></div>
+          <div class="row"><dt>Chassis</dt><dd>custom, printed</dd></div>
+          <div class="row"><dt>Ballast</dt><dd>printed TPU foam</dd></div>
+          <div class="row"><dt>End effector</dt><dd>custom manipulator</dd></div>
+        </dl>
+      </div>
+
+      <div class="spec-block">
+        <h3>Electronics</h3>
+        <dl>
+          <div class="row"><dt>Computer</dt><dd>Raspberry Pi 5</dd></div>
+          <div class="row"><dt>PWM driver</dt><dd>PCA9685</dd></div>
+          <div class="row"><dt>IMU</dt><dd>MPU6050</dd></div>
+          <div class="row"><dt>Propulsion</dt><dd>thrusters + ESCs</dd></div>
+          <div class="row"><dt>Power</dt><dd>buck converter rails</dd></div>
+          <div class="row"><dt>Vision</dt><dd>camera systems</dd></div>
+        </dl>
+      </div>
+
+      <div class="spec-block">
+        <h3>Team</h3>
+        <dl>
+          <div class="row"><dt>Org</dt><dd>Engineering Renaissance Club</dd></div>
+          <div class="row"><dt>Size</dt><dd>~47 members</dd></div>
+          <div class="row"><dt>Author role</dt><dd>Co-CEO / CTO</dd></div>
+          <div class="row"><dt>Domains owned</dt><dd>electrical · software</dd></div>
+          <div class="row"><dt>Software</dt><dd>C++</dd></div>
+        </dl>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="title-block">
+    <div class="cell"><span class="k">Title</span><span class="v">ROV — Crush Depth</span></div>
+    <div class="cell"><span class="k">Drawn by</span><span class="v">J. O. Jackson</span></div>
+    <div class="cell"><span class="k">Doc / Rev</span><span class="v">DS-01 · A</span></div>
+    <div class="cell"><span class="k">Sheet</span><span class="v">01</span></div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PERRY — Vertical Profiling Float · J. O. Jackson</title>
+<meta name="description" content="PERRY: a LoRa-activated vertical profiling float. O-ring seal design, buoyancy engine, acetone-vapor-smoothed ABS hull. Verified to 4 m.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="sheet">
+
+  <header class="doc-header">
+    <div class="doc-id">DS-02</div>
+    <div class="doc-title">
+      <h1>PERRY</h1>
+      <p class="subtitle">Pressure Equipped Robot for Research and Yield — vertical profiling float</p>
+    </div>
+    <div class="doc-rev">
+      <span class="rev-letter">REV A</span><br>
+      2026-08-27
+    </div>
+  </header>
+
+  <nav class="doc-nav" aria-label="Datasheet index">
+    <a href="index.html">INDEX</a>
+    <a href="01-rov.html">01 ROV</a>
+    <a href="02-perry.html" aria-current="page">02 PERRY</a>
+  </nav>
+
+  <div class="doc-body">
+    <div class="prose">
+
+      <section>
+        <h2><span class="sec-no">1</span>OVERVIEW</h2>
+        <p>PERRY is a vertical profiling float built for the MATE ROV international
+        competition, modeled on the oceanographic float craft used for ocean-health
+        and weather monitoring. On receiving an activation signal over LoRa, it
+        executes three vertical profiles to a predetermined depth, logging
+        temperature, pressure, and depth throughout, then transmits the full
+        dataset to the base station on resurfacing.</p>
+        <p>The craft completed its mission profile in open water: it profiled to
+        4&nbsp;m, resurfaced, and delivered its logged data over the radio link.</p>
+      </section>
+
+      <section>
+        <h2><span class="sec-no">2</span>PRESSURE SEALING</h2>
+        <p>The hull is a sealed pressure vessel and the sealing strategy is the
+        core mechanical problem of the craft. Static o-ring seals close the hull;
+        seal design covered o-ring groove sizing, seal-stack layout, and selection
+        of a waterproof grease for assembly.</p>
+        <p>The hull is FDM-printed in ABS, which leaves a layered, porous surface
+        unsuited to sealing. Printed sealing surfaces were treated by acetone
+        vapor smoothing, using the solvent pass as a conformal surface treatment
+        to close layer lines before seal assembly.</p>
+      </section>
+
+      <section>
+        <h2><span class="sec-no">3</span>BUOYANCY ENGINE</h2>
+        <p>Depth is driven by a buoyancy engine rather than thrusters: a NEMA17
+        stepper motor, running through a TMC2209 driver under UART control,
+        changes the craft's displacement to move it between the surface and the
+        target depth. Sizing the engine against the craft's buoyancy budget —
+        the physics side of the design — sat with the author, alongside the
+        electronics and firmware.</p>
+      </section>
+
+      <section>
+        <h2><span class="sec-no">4</span>ELECTRONICS &amp; FIRMWARE</h2>
+        <p>An ESP32 runs the mission logic: arming over LoRa, profile sequencing,
+        sensor logging, and data return. Depth and pressure come from a Blue
+        Robotics Bar02 pressure sensor on the I²C bus. The stepper driver is
+        commanded over UART. All electronics were assembled and soldered on
+        protoboard.</p>
+      </section>
+
+      <section>
+        <h2><span class="sec-no">5</span>ROLE &amp; ATTRIBUTION</h2>
+        <p>Team project (Crush Depth float team). The author owned the
+        programming, the electronics, and the physics and buoyancy side of the
+        craft, and previously served as Float Team Technical Lead — taking the
+        subteam through LoRa communications, ESP32 development, stepper motors
+        and drivers, and board assembly.</p>
+      </section>
+
+      <section class="limitations">
+        <h2><span class="sec-no">6</span>KNOWN LIMITATIONS</h2>
+        <ul>
+          <li>Seal integrity is verified to 4&nbsp;m only. Maximum safe operating
+          depth has not been characterized.</li>
+          <li>Effective LoRa range was not measured; the link is verified only at
+          mission distances.</li>
+          <li>Craft mass, displacement, and sensor sample rate were not formally
+          recorded.</li>
+          <li>Single Bar02 sensor with no redundancy; a sensor fault ends the
+          mission.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <aside class="spec-rail">
+      <div class="measured">
+        <span class="label">Measured result</span>
+        <div class="value">4 m profile depth</div>
+        <span class="note">Profiled, resurfaced, and transmitted logged data</span>
+      </div>
+
+      <div class="spec-block">
+        <h3>Mission</h3>
+        <dl>
+          <div class="row"><dt>Activation</dt><dd>LoRa signal</dd></div>
+          <div class="row"><dt>Profiles / mission</dt><dd>3</dd></div>
+          <div class="row"><dt>Logged</dt><dd>temp · pressure · depth</dd></div>
+          <div class="row"><dt>Data return</dt><dd>LoRa, on resurfacing</dd></div>
+        </dl>
+      </div>
+
+      <div class="spec-block">
+        <h3>Mechanical</h3>
+        <dl>
+          <div class="row"><dt>Hull process</dt><dd>FDM, ABS</dd></div>
+          <div class="row"><dt>Printer</dt><dd>Bambu Lab</dd></div>
+          <div class="row"><dt>Surface</dt><dd>acetone vapor smoothed</dd></div>
+          <div class="row"><dt>Sealing</dt><dd>static o-rings</dd></div>
+          <div class="row"><dt>Depth drive</dt><dd>buoyancy engine</dd></div>
+        </dl>
+      </div>
+
+      <div class="spec-block">
+        <h3>Electronics</h3>
+        <dl>
+          <div class="row"><dt>MCU</dt><dd>ESP32</dd></div>
+          <div class="row"><dt>Motor</dt><dd>NEMA17 stepper</dd></div>
+          <div class="row"><dt>Driver</dt><dd>TMC2209 (UART)</dd></div>
+          <div class="row"><dt>Pressure sensor</dt><dd>BR Bar02 (I²C)</dd></div>
+          <div class="row"><dt>Radio</dt><dd>LoRa</dd></div>
+          <div class="row"><dt>Assembly</dt><dd>protoboard, soldered</dd></div>
+        </dl>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="title-block">
+    <div class="cell"><span class="k">Title</span><span class="v">PERRY — Vertical Profiling Float</span></div>
+    <div class="cell"><span class="k">Drawn by</span><span class="v">J. O. Jackson</span></div>
+    <div class="cell"><span class="k">Doc / Rev</span><span class="v">DS-02 · A</span></div>
+    <div class="cell"><span class="k">Sheet</span><span class="v">02</span></div>
+  </footer>
+
+</div>
+</body>
+</html>
