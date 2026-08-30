@@ -1,48 +1,61 @@
 /* ==========================================================================
    Datasheet stylesheet — shared by every page (00–05).
-   System: paper-white vellum, abyssal-teal ink, safety-amber accent,
-   JetBrains Mono throughout. Print-to-PDF is a first-class target.
+   System: paper white, abyssal-teal ink, safety-amber accent.
+   Type: IBM Plex Sans for prose; JetBrains Mono for data, labels, numbers.
+   Print-to-PDF is a first-class target.
    ========================================================================== */
 
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("fonts/JetBrainsMono-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-family: "IBM Plex Sans";
+  src: url("fonts/IBMPlexSans-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("fonts/IBMPlexSans-Italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("fonts/IBMPlexSans-Medium.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("fonts/IBMPlexSans-SemiBold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("fonts/IBMPlexSans-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("fonts/JetBrainsMono-Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
+  src: url("fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: "JetBrains Mono";
   src: url("fonts/JetBrainsMono-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+  font-weight: 700; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: "JetBrains Mono";
   src: url("fonts/JetBrainsMono-ExtraBold.woff2") format("woff2");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
+  font-weight: 800; font-style: normal; font-display: swap;
 }
 
 :root {
-  --paper: #f9f9f6;
-  --grid-line: rgba(16, 63, 69, 0.07);
-  --ink: #103f45;        /* abyssal teal, text weight */
-  --ink-deep: #082b30;   /* headings, doc numbers */
-  --ink-mid: #4a7379;    /* labels, secondary text */
-  --rule: #b8c9c7;       /* hairline rules */
-  --rule-strong: #103f45;
+  --paper: #fbfbf8;
+  --ink: #17444a;        /* abyssal teal, text weight */
+  --ink-deep: #0a2e33;   /* headings, doc numbers */
+  --ink-mid: #5a7d81;    /* labels, secondary text */
+  --rule: #ccd8d6;       /* hairline rules */
+  --rule-strong: #17444a;
   --amber: #e39b00;      /* safety amber — measured results, rev block */
-  --amber-deep: #9a6a00; /* amber legible at text size on paper */
+  --amber-deep: #9a6a00;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
 }
 
@@ -51,24 +64,20 @@
 html { -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: var(--mono);
-  font-size: 13px;
-  line-height: 1.65;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--ink);
-  background-color: var(--paper);
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background: var(--paper);
 }
 
 .sheet {
   max-width: 960px;
-  margin: 32px auto 48px;
-  padding: 0 20px;
+  margin: 48px auto 64px;
+  padding: 0 24px;
 }
 
-a { color: var(--ink); text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a { color: var(--ink-deep); text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 a:hover { color: var(--amber-deep); }
 a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 
@@ -80,13 +89,14 @@ a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 16px;
-  padding-bottom: 10px;
+  gap: 20px;
+  padding-bottom: 14px;
   border-bottom: 3px solid var(--rule-strong);
 }
 
 .doc-id {
-  font-size: 12px;
+  font-family: var(--mono);
+  font-size: 13px;
   font-weight: 700;
   color: var(--ink-mid);
   letter-spacing: 0.08em;
@@ -94,20 +104,21 @@ a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 }
 
 .doc-title h1 {
-  font-size: 30px;
-  font-weight: 800;
+  font-size: 34px;
+  font-weight: 700;
   color: var(--ink-deep);
-  letter-spacing: 0.02em;
-  line-height: 1.1;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
 }
 
 .doc-title .subtitle {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ink-mid);
-  margin-top: 4px;
+  margin-top: 5px;
 }
 
 .doc-rev {
+  font-family: var(--mono);
   font-size: 11px;
   text-align: right;
   color: var(--ink-mid);
@@ -119,15 +130,16 @@ a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
   font-size: 13px;
   color: var(--ink-deep);
   border: 2px solid var(--amber);
-  padding: 1px 8px;
-  margin-bottom: 4px;
+  padding: 1px 9px;
+  margin-bottom: 5px;
 }
 
 .doc-nav {
   display: flex;
-  gap: 18px;
-  padding: 8px 0;
+  gap: 22px;
+  padding: 10px 0;
   border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.06em;
 }
@@ -141,75 +153,80 @@ a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 
 .doc-body {
   display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 0 32px;
-  margin-top: 24px;
+  grid-template-columns: 1fr 300px;
+  gap: 0 44px;
+  margin-top: 32px;
 }
 
-.prose { min-width: 0; }
+.prose { min-width: 0; max-width: 60ch; }
 
-section { margin-bottom: 26px; }
+section { margin-bottom: 34px; }
 
 section h2 {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--ink-deep);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   border-bottom: 1px solid var(--rule);
-  padding-bottom: 4px;
-  margin-bottom: 10px;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
 }
-section h2 .sec-no { color: var(--ink-mid); margin-right: 10px; }
+section h2 .sec-no {
+  font-family: var(--mono);
+  color: var(--ink-mid);
+  margin-right: 12px;
+}
 
-section p { margin-bottom: 10px; }
+section p { margin-bottom: 12px; }
 section p:last-child { margin-bottom: 0; }
 
-section ul { margin: 0 0 10px 18px; }
-section li { margin-bottom: 5px; }
+section ul { margin: 0 0 12px 20px; }
+section li { margin-bottom: 6px; }
 
 em { font-style: italic; }
-strong { font-weight: 700; color: var(--ink-deep); }
+strong { font-weight: 600; color: var(--ink-deep); }
 
-/* Spec rail */
+/* Spec rail — data lives in mono */
 .spec-rail { font-size: 12px; }
 
 .spec-block {
   border: 1px solid var(--rule);
   border-top: 3px solid var(--rule-strong);
-  margin-bottom: 18px;
-  background: rgba(255, 255, 255, 0.55);
+  margin-bottom: 22px;
+  background: #fff;
 }
 .spec-block h3 {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--ink-deep);
-  padding: 7px 10px 5px;
+  padding: 8px 12px 6px;
   border-bottom: 1px solid var(--rule);
 }
-.spec-block dl { padding: 4px 10px 8px; }
+.spec-block dl { padding: 6px 12px 10px; font-family: var(--mono); }
 .spec-block .row {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  padding: 3px 0;
+  padding: 4px 0;
   border-bottom: 1px dotted var(--rule);
 }
 .spec-block .row:last-child { border-bottom: none; }
 .spec-block dt { color: var(--ink-mid); flex-shrink: 0; }
-.spec-block dd { text-align: right; font-weight: 700; overflow-wrap: anywhere; }
+.spec-block dd { text-align: right; font-weight: 700; color: var(--ink-deep); overflow-wrap: anywhere; }
 
 /* Measured result — the amber moment. Used only for verified numbers. */
 .measured {
   border: 1px solid var(--amber);
   border-left: 6px solid var(--amber);
-  padding: 10px 12px;
-  margin-bottom: 18px;
-  background: rgba(227, 155, 0, 0.06);
+  padding: 12px 14px;
+  margin-bottom: 22px;
+  background: #fff;
 }
 .measured .label {
+  font-family: var(--mono);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -217,52 +234,59 @@ strong { font-weight: 700; color: var(--ink-deep); }
   color: var(--amber-deep);
 }
 .measured .value {
-  font-size: 20px;
+  font-family: var(--mono);
+  font-size: 19px;
   font-weight: 800;
   color: var(--ink-deep);
-  line-height: 1.3;
+  line-height: 1.35;
+  margin: 2px 0;
 }
-.measured .note { font-size: 11px; color: var(--ink-mid); }
+.measured .note { font-size: 12.5px; color: var(--ink-mid); line-height: 1.5; display: block; }
 
 /* Known limitations — deliberate, high-signal. Never soften. */
 .limitations {
   border: 1px solid var(--rule-strong);
+  background: #fff;
 }
 .limitations h2 {
   background: var(--ink-deep);
   color: var(--paper);
   border-bottom: none;
-  padding: 6px 12px;
+  padding: 8px 14px;
   margin-bottom: 0;
 }
 .limitations h2 .sec-no { color: var(--amber); }
-.limitations ul { margin: 0; padding: 10px 12px 10px 30px; }
+.limitations ul { margin: 0; padding: 12px 16px 12px 34px; }
 
 /* Data tables (capability matrix, index table) */
-table { border-collapse: collapse; width: 100%; font-size: 12px; }
-th, td { border: 1px solid var(--rule); padding: 6px 9px; text-align: left; vertical-align: top; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { border: 1px solid var(--rule); padding: 8px 11px; text-align: left; vertical-align: top; }
 th {
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-weight: 600;
   color: var(--ink-deep);
-  background: rgba(16, 63, 69, 0.05);
+  background: rgba(23, 68, 74, 0.045);
 }
+td.num { font-family: var(--mono); font-size: 12.5px; font-weight: 700; }
 
 /* --------------------------------------------------------------------------
    Title block footer — engineering-drawing style
    -------------------------------------------------------------------------- */
 
 .title-block {
-  margin-top: 36px;
+  margin-top: 44px;
   border: 2px solid var(--rule-strong);
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  font-size: 10px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  background: #fff;
 }
 .title-block .cell {
   border-right: 1px solid var(--rule-strong);
-  padding: 5px 9px 6px;
+  padding: 6px 10px 7px;
 }
 .title-block .cell:last-child { border-right: none; }
 .title-block .cell .k {
@@ -279,13 +303,14 @@ th {
    -------------------------------------------------------------------------- */
 
 @media (max-width: 720px) {
-  body { font-size: 12.5px; }
-  .sheet { margin-top: 16px; padding: 0 12px; }
+  body { font-size: 14.5px; }
+  .sheet { margin-top: 20px; padding: 0 16px; }
   .doc-header { flex-wrap: wrap; align-items: baseline; }
   .doc-title { order: -1; flex-basis: 100%; }
-  .doc-title h1 { font-size: 24px; }
+  .doc-title h1 { font-size: 26px; }
   .doc-body { grid-template-columns: 1fr; }
-  .spec-rail { order: -1; margin-bottom: 8px; }
+  .prose { max-width: none; }
+  .spec-rail { order: -1; margin-bottom: 10px; }
   .title-block { grid-template-columns: 1fr 1fr; }
   .title-block .cell { border-bottom: 1px solid var(--rule-strong); }
   .title-block .cell:nth-child(2n) { border-right: none; }
@@ -298,23 +323,21 @@ th {
 }
 
 /* --------------------------------------------------------------------------
-   Print — hard requirement. Ink on paper, no nav, no background grid.
+   Print — hard requirement. Ink on paper, no nav.
    -------------------------------------------------------------------------- */
 
 @page { margin: 14mm 12mm; }
 
 @media print {
-  body { background: #fff; font-size: 11px; }
+  body { background: #fff; font-size: 11.5px; }
   .sheet { max-width: none; margin: 0; padding: 0; }
   .doc-nav { display: none; }
   section, .spec-block, .measured, .title-block { break-inside: avoid; }
-  .spec-block { background: none; }
-  .measured { background: none; }
   .limitations h2 {
     background: none;
     color: var(--ink-deep);
     border-bottom: 2px solid var(--ink-deep);
-    padding: 6px 0;
+    padding: 8px 0;
   }
   .limitations { border-color: var(--ink-deep); }
   a { text-decoration: none; color: inherit; }
