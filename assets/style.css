@@ -243,6 +243,37 @@ strong { font-weight: 600; color: var(--ink-deep); }
 }
 .measured .note { font-size: 12.5px; color: var(--ink-mid); line-height: 1.5; display: block; }
 
+/* Figures. `.pending` marks a reserved frame awaiting a real photo/render;
+   pending frames are hidden in print so application PDFs never show a blank. */
+.figure { margin: 14px 0 4px; }
+.figure .frame {
+  border: 1px solid var(--rule);
+  background:
+    repeating-linear-gradient(45deg, rgba(23, 68, 74, 0.045) 0 10px, transparent 10px 20px),
+    #fff;
+  aspect-ratio: 16 / 7;
+  display: grid;
+  place-items: center;
+}
+.figure .frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.figure .frame .pending-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink-mid);
+  border: 1px dashed var(--rule);
+  background: var(--paper);
+  padding: 4px 12px;
+}
+.figure figcaption {
+  font-size: 12.5px;
+  color: var(--ink-mid);
+  margin-top: 7px;
+  line-height: 1.5;
+}
+.figure figcaption .fig-no { font-family: var(--mono); font-weight: 700; color: var(--ink-deep); margin-right: 8px; }
+
 /* Known limitations — deliberate, high-signal. Never soften. */
 .limitations {
   border: 1px solid var(--rule-strong);
@@ -332,6 +363,7 @@ td.num { font-family: var(--mono); font-size: 12.5px; font-weight: 700; }
   body { background: #fff; font-size: 11.5px; }
   .sheet { max-width: none; margin: 0; padding: 0; }
   .doc-nav { display: none; }
+  .figure.pending { display: none; }
   section, .spec-block, .measured, .title-block { break-inside: avoid; }
   .limitations h2 {
     background: none;
