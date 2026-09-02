@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TM-01 Crush Depth ROV · J. O. Jackson</title>
-<meta name="description" content="Technical memorandum: Crush Depth ROV, an underwater remotely operated vehicle for the MATE ROV World Championship. Printed chassis and housings, custom manipulator, pilot-first control architecture.">
+<meta name="description" content="Technical memorandum: Crush Depth ROV, an underwater remotely operated vehicle for the MATE ROV World Championship. Eight T200 thrusters, four cameras in SLA-printed housings, 48 V tether, printed chassis, pilot-first control architecture.">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -14,12 +14,11 @@
     <a href="index.html">Jack O. Jackson</a>
     <a href="01-rov.html" aria-current="page">TM-01 ROV</a>
     <a href="02-perry.html">TM-02 PERRY</a>
-    <a href="03-doc-ock.html">TM-03 Doc Ock</a>
-    <a href="04-clark.html">TM-04 CLARK</a>
+    <a href="03-clark.html">TM-03 CLARK</a>
     <a href="pdf/TM-01-ROV.pdf">PDF</a>
   </nav>
 
-  <div class="runhead"><span>TM-01 · Rev B</span><span>J. O. Jackson · 2026-09-01</span></div>
+  <div class="runhead"><span>TM-01 · Rev C</span><span>J. O. Jackson · 2026-09-02</span></div>
 
   <header>
     <div class="kind">Technical Memorandum</div>
@@ -27,32 +26,36 @@
     <div class="sub">Competition seasons 2025 and 2026</div>
     <div class="authors">J. O. Jackson<small>Crush Depth, Engineering Renaissance Club, Clovis Community College</small></div>
 
-    <p class="abstract"><b>Abstract.</b> Crush Depth's ROV performs simulated environmental-research and industrial-inspection tasks for the MATE ROV competition. The structure is custom and FDM-printed from SolidWorks models; a Raspberry Pi 5 drives thrusters through ESCs and a PCA9685, and the C++ control layer is laid out for pilot ergonomics. This memorandum is written by the team's Co-CEO / CTO, who owned the electrical and software domains; the mechanical design in Section&nbsp;1 is the work of the team's mechanical group. The vehicle competed at the World Championship in 2025 and 2026, and the author received the Engineering Presentation MVP award in 2026.</p>
+    <p class="abstract"><b>Abstract.</b> Crush Depth's ROV performs simulated environmental-research and industrial-inspection tasks for the MATE ROV competition. Eight Blue Robotics T200 thrusters are driven from a Raspberry Pi 5 through ESCs and a PCA9685; four cameras in SLA-printed waterproof housings give the pilot vision; power arrives at 48&nbsp;V DC on the tether and is stepped down through buck converters. The structure is custom, SolidWorks-modeled and FDM-printed. The author is the team's Co-CEO / CTO and owned the electrical and software domains, and designed the vehicle's internal electronics mounts and its service stand; the chassis, housings, and manipulator are the work of the team's mechanical group. The vehicle competed at the World Championship in 2025 and 2026, and the author received the Engineering Presentation MVP award in 2026.</p>
   </header>
 
   <section>
     <h2><span class="n">1</span>Mechanical Design</h2>
-    <p>The vehicle's structure is custom, modeled in SolidWorks and printed FDM on Bambu Lab machines: an outer chassis, an internal housing that carries the electronics stack, and a TPU foam ballast printed to shape. A custom manipulator, designed against the competition's mission tasks, is the vehicle's working end.</p>
+    <p>The vehicle's structure is custom, modeled in SolidWorks and printed FDM on Bambu Lab machines: an outer chassis, an internal housing that carries the electronics stack, and a TPU foam ballast printed to shape. A custom manipulator, designed against the competition's mission tasks, is the vehicle's working end. The four cameras sit in SLA-printed waterproof cases that interface with FDM-printed mounts, pairing the resolution of SLA where the seal is with the speed of FDM where it is not.</p>
     <p>Waterproofing is handled as a vehicle-level strategy rather than a per-part fix. Every penetration, housing, and connector has to hold at mission depth for the vehicle to score at all.</p>
-    <figure class="fig pending">
-      <div class="box">Figure slot: general arrangement.</div>
-      <figcaption class="cap"><b>Figure 1.</b> ROV, general arrangement.</figcaption>
+    <p>The author's mechanical contributions were on the serviceability side. The tether penetrators are epoxied into the backplate, so a vehicle set down on its back loads the epoxy joints; the author designed a stand that holds the backplate clear of the bench so the vehicle can be worked on and shown without pressing on the penetrators. The author also designed the mounts that locate the electronics inside the housing.</p>
+    <figure class="fig pair">
+      <div class="frames">
+        <img src="assets/img/rov-poolside.jpg" alt="Crush Depth ROV on a pool deck: black frame, blue thruster guards, green manipulator, cameras and cabling visible." width="1200" height="1600">
+        <img src="assets/img/rov-electronics.jpg" alt="The author seated on the floor working on the ROV's internal electronics with the frame open." width="1200" height="1600">
+      </div>
+      <figcaption class="cap"><b>Figure 1.</b> Left: the vehicle on deck before a pool session. Right: the author working on the electronics stack with the vehicle open.</figcaption>
     </figure>
   </section>
 
   <section>
     <h2><span class="n">2</span>Electronics and Power</h2>
-    <p>A Raspberry Pi 5 is the vehicle computer. It drives the thrusters through ESCs via a PCA9685 PWM driver, reads an MPU6050 IMU for attitude sensing, and carries the camera systems for the pilot. Power distribution runs through multiple buck converters stepping the tether supply down to the rails the electronics need.</p>
+    <p>A Raspberry Pi 5 is the vehicle computer. It drives eight Blue Robotics T200 thrusters through ESCs via a PCA9685 PWM driver, reads an MPU6050 IMU for attitude sensing, and carries four camera feeds for the pilot. The tether delivers 48&nbsp;V DC; multiple buck converters step it down to the rails the electronics need.</p>
     <div class="tabwrap">
       <table>
         <caption><b>Table 1.</b> System summary.</caption>
         <thead><tr><th>Subsystem</th><th>Component</th><th>Notes</th></tr></thead>
         <tbody>
           <tr><td>Vehicle computer</td><td>Raspberry Pi 5</td><td>control software in C++</td></tr>
-          <tr><td>Thruster drive</td><td>ESCs via PCA9685 PWM driver</td><td>—</td></tr>
+          <tr><td>Propulsion</td><td>8× Blue Robotics T200</td><td>ESCs via PCA9685 PWM driver</td></tr>
           <tr><td>Attitude</td><td>MPU6050 IMU</td><td>—</td></tr>
-          <tr><td>Vision</td><td>camera systems</td><td>pilot view</td></tr>
-          <tr><td>Power</td><td>buck converters from tether supply</td><td>multiple rails</td></tr>
+          <tr><td>Vision</td><td>4× camera</td><td>SLA-printed waterproof cases on FDM mounts</td></tr>
+          <tr><td>Power</td><td>48 V DC tether</td><td>buck converters to multiple rails</td></tr>
           <tr><td>Structure</td><td>FDM chassis, housing, TPU ballast</td><td>SolidWorks; Bambu Lab printers</td></tr>
           <tr><td>End effector</td><td>custom manipulator</td><td>designed against mission tasks</td></tr>
         </tbody>
@@ -80,7 +83,7 @@
     </ul>
   </section>
 
-  <footer class="pgfoot"><span>Crush Depth ROV · TM-01 · Rev B · 2026-09-01</span><span>J. O. Jackson</span></footer>
+  <footer class="pgfoot"><span>Crush Depth ROV · TM-01 · Rev C · 2026-09-02</span><span>J. O. Jackson</span></footer>
 
 </article>
 </body>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TM-02 PERRY — Vertical Profiling Float · J. O. Jackson</title>
-<meta name="description" content="Technical memorandum: PERRY, a LoRa-activated vertical profiling float. O-ring seal design, buoyancy engine, acetone-vapor-smoothed ABS hull. Verified to 4 m in open water.">
+<meta name="description" content="Technical memorandum: PERRY, a LoRa-activated vertical profiling float. O-ring sealed, acetone-vapor-smoothed ABS hull; silicone grease after marine grease failed in the field; 50 mL buoyancy engine. Verified to 4 m in open water.">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -14,12 +14,11 @@
     <a href="index.html">Jack O. Jackson</a>
     <a href="01-rov.html">TM-01 ROV</a>
     <a href="02-perry.html" aria-current="page">TM-02 PERRY</a>
-    <a href="03-doc-ock.html">TM-03 Doc Ock</a>
-    <a href="04-clark.html">TM-04 CLARK</a>
+    <a href="03-clark.html">TM-03 CLARK</a>
     <a href="pdf/TM-02-PERRY.pdf">PDF</a>
   </nav>
 
-  <div class="runhead"><span>TM-02 · Rev B</span><span>J. O. Jackson · 2026-09-01</span></div>
+  <div class="runhead"><span>TM-02 · Rev C</span><span>J. O. Jackson · 2026-09-02</span></div>
 
   <header>
     <div class="kind">Technical Memorandum</div>
@@ -27,31 +26,31 @@
     <div class="sub">Pressure Equipped Robot for Research and Yield</div>
     <div class="authors">J. O. Jackson<small>Crush Depth float team, MATE ROV international competition</small></div>
 
-    <p class="abstract"><b>Abstract.</b> PERRY is a vertical profiling float: on a LoRa activation signal it runs three profiles to a set depth, logging temperature, pressure, and depth, and transmits the record on resurfacing. In open water it profiled to 4&nbsp;m, resurfaced, and returned its data. The author owned the programming, the electronics, and the buoyancy design on a team build; the hull sealing work is described in Section&nbsp;1 and the limits of the verification in Section&nbsp;5.</p>
+    <p class="abstract"><b>Abstract.</b> PERRY is a vertical profiling float: on a LoRa activation signal it runs three profiles to a set depth, logging temperature, pressure, and depth, and transmits the record on resurfacing. The hull is acetone-vapor-smoothed ABS closed by static o-rings; field testing showed marine grease admitting water at the seals, and the switch to silicone grease fixed it. A 50&nbsp;mL buoyancy engine moves the craft, which has a mass of roughly 4.5&nbsp;kg. In open water it profiled to 4&nbsp;m, resurfaced, and returned its data. The author owned the programming, the electronics, and the buoyancy design on a team build.</p>
   </header>
 
   <section>
     <h2><span class="n">1</span>Pressure Sealing</h2>
-    <p>The hull is a sealed pressure vessel, and the sealing strategy is the core mechanical problem of the craft. Static o-ring seals close the hull. The seal design covered o-ring groove sizing, seal-stack layout, and selection of a waterproof grease for assembly.</p>
-    <p>The hull is FDM-printed in ABS on a Bambu Lab printer, which leaves a layered, porous surface unsuited to sealing. Printed sealing surfaces were treated by acetone vapor smoothing, using the solvent pass as a conformal surface treatment to close layer lines before seal assembly.</p>
-    <figure class="fig pending">
-      <div class="box">Figure slot: assembled craft.</div>
-      <figcaption class="cap"><b>Figure 1.</b> PERRY as assembled for the open-water mission.</figcaption>
-    </figure>
-    <figure class="fig pending">
-      <div class="box">Figure slot: sealing detail.</div>
-      <figcaption class="cap"><b>Figure 2.</b> Hull sealing detail: o-ring glands and acetone-vapor-smoothed sealing surfaces.</figcaption>
+    <p>The hull is a sealed pressure vessel, and the sealing strategy is the core mechanical problem of the craft. Static o-ring seals close the hull. The seal design covered o-ring groove sizing, seal-stack layout, and selection of a grease for assembly.</p>
+    <p>The grease selection was decided by test. The first field tests were run with marine grease, and the hull took on water at the seals. Switching to silicone grease stopped the ingress, and the open-water mission was run on silicone.</p>
+    <p>The hull is FDM-printed in ABS on a Bambu Lab printer, which leaves a layered, porous surface unsuited to sealing. The printed hull was acetone-vapor smoothed in a chamber, using the solvent pass as a conformal surface treatment to close layer lines. The print was set up for the treatment: extra perimeter walls were added so the smoothing pass could not open the surface into the infill.</p>
+    <figure class="fig pair">
+      <div class="frames">
+        <img src="assets/img/perry-assembled.jpg" alt="PERRY float, assembled: blue printed hull, red cap, orange handle, yellow base." width="1600" height="1200">
+        <img src="assets/img/perry-lineup.jpg" alt="PERRY on a pool deck in front of other teams' profiling floats." width="1200" height="1600">
+      </div>
+      <figcaption class="cap"><b>Figure 1.</b> Left: PERRY as assembled for the open-water mission. Right: on the deck at the test site, other teams' floats behind.</figcaption>
     </figure>
   </section>
 
   <section>
     <h2><span class="n">2</span>Buoyancy Engine</h2>
-    <p>Depth is driven by a buoyancy engine rather than thrusters. A NEMA17 stepper motor, running through a TMC2209 driver under UART control, changes the craft's displacement to move it between the surface and the target depth. The author sized the engine against the craft's buoyancy budget.</p>
+    <p>Depth is driven by a buoyancy engine rather than thrusters. A NEMA17 stepper motor, running through a TMC2209 driver under UART control, changes the craft's displacement by 50&nbsp;mL to move it between the surface and the target depth. The craft has a mass of roughly 4.5&nbsp;kg (10&nbsp;lb). The 50&nbsp;mL allowance was set by estimate against that mass and confirmed by trial rather than by a formal buoyancy calculation; that is recorded as a limitation in Section&nbsp;5.</p>
   </section>
 
   <section>
     <h2><span class="n">3</span>Electronics and Firmware</h2>
-    <p>An ESP32 runs the mission logic: arming over LoRa, profile sequencing, sensor logging, and data return. Depth and pressure are read from a Blue Robotics Bar02 pressure sensor on the I²C bus. The stepper driver is commanded over UART. All electronics were assembled and soldered on protoboard.</p>
+    <p>An ESP32 runs the mission logic: arming over LoRa, profile sequencing, sensor logging, and data return. Depth and pressure are read from a Blue Robotics Bar02 pressure sensor on the I²C bus. The LoRa link is a REYAX RYLR896 module on a 115200-baud UART. The stepper driver is commanded over a second UART. All electronics were assembled and soldered on protoboard.</p>
     <div class="tabwrap">
       <table>
         <caption><b>Table 1.</b> System summary.</caption>
@@ -59,9 +58,10 @@
         <tbody>
           <tr><td>Controller</td><td>ESP32</td><td>mission logic, logging, radio</td></tr>
           <tr><td>Pressure and depth</td><td>Blue Robotics Bar02</td><td>I²C</td></tr>
-          <tr><td>Depth drive</td><td>NEMA17 stepper, TMC2209 driver</td><td>UART</td></tr>
-          <tr><td>Radio</td><td>LoRa module</td><td>activation and data return</td></tr>
-          <tr><td>Hull</td><td>FDM ABS, Bambu Lab printer</td><td>static o-rings, acetone vapor smoothed</td></tr>
+          <tr><td>Depth drive</td><td>NEMA17 stepper, TMC2209 driver</td><td>UART; 50 mL displacement change</td></tr>
+          <tr><td>Radio</td><td>REYAX RYLR896 LoRa</td><td>UART, 115200 baud</td></tr>
+          <tr><td>Hull</td><td>FDM ABS, Bambu Lab printer</td><td>chamber vapor smoothed; static o-rings; silicone grease</td></tr>
+          <tr><td>Mass</td><td>roughly 4.5 kg</td><td>not formally weighed</td></tr>
           <tr><td>Assembly</td><td>protoboard, hand soldered</td><td>—</td></tr>
         </tbody>
       </table>
@@ -70,10 +70,34 @@
 
   <section>
     <h2><span class="n">4</span>Open-Water Verification</h2>
-    <p>The craft completed its mission profile in open water: it profiled to 4&nbsp;m, resurfaced, and delivered its logged data over the radio link.</p>
-    <figure class="fig pending">
-      <div class="box">Figure slot: depth versus time from the Bar02 log.</div>
-      <figcaption class="cap"><b>Figure 3.</b> Depth versus time for the open-water mission, three profiles to 4&nbsp;m, from the Bar02 log.</figcaption>
+    <p>The craft completed its mission profile in open water: it profiled to 4&nbsp;m, resurfaced, and delivered its logged data over the radio link. Figure&nbsp;2 shows the commanded mission profile. The logged dataset itself was not retained (Section&nbsp;5), so no measured profile is reproduced here.</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 300" role="img" aria-label="Commanded mission profile: three descents from the surface to 4 metres and back.">
+        <rect x="0" y="0" width="640" height="300" fill="#fff"/>
+        <g stroke="#111" stroke-width="0.8" fill="none">
+          <rect x="70" y="18" width="550" height="230"/>
+          <line x1="70" y1="133" x2="76" y2="133"/>
+          <line x1="70" y1="248" x2="76" y2="248"/>
+          <line x1="620" y1="133" x2="614" y2="133"/>
+        </g>
+        <g stroke="#bbb" stroke-width="0.6" stroke-dasharray="3 4">
+          <line x1="70" y1="248" x2="620" y2="248"/>
+        </g>
+        <polyline fill="none" stroke="#111" stroke-width="1.6" stroke-linejoin="round"
+          points="70,18 110,18 150,248 190,248 230,18 260,18 300,248 340,248 380,18 410,18 450,248 490,248 530,18 620,18"/>
+        <g font-family="CMU Serif, Times New Roman, serif" font-size="12" fill="#111">
+          <text x="60" y="22" text-anchor="end">0</text>
+          <text x="60" y="137" text-anchor="end">2</text>
+          <text x="60" y="252" text-anchor="end">4</text>
+          <text x="22" y="133" transform="rotate(-90 22 133)" text-anchor="middle">Depth (m)</text>
+          <text x="345" y="282" text-anchor="middle">Time from LoRa activation (durations not to scale)</text>
+          <text x="170" y="262" text-anchor="middle" font-size="11" fill="#555">profile 1</text>
+          <text x="320" y="262" text-anchor="middle" font-size="11" fill="#555">profile 2</text>
+          <text x="470" y="262" text-anchor="middle" font-size="11" fill="#555">profile 3</text>
+          <text x="575" y="35" text-anchor="middle" font-size="11" fill="#555">transmit</text>
+        </g>
+      </svg>
+      <figcaption class="cap"><b>Figure 2.</b> Commanded mission profile: three descents to the 4&nbsp;m target and return, then data transmission at the surface. This is the commanded sequence, not a plot of logged data; durations are schematic.</figcaption>
     </figure>
   </section>
 
@@ -81,8 +105,11 @@
     <h2><span class="n">5</span>Known Limitations</h2>
     <ul>
       <li>Seal integrity is verified to 4&nbsp;m only. Maximum safe operating depth has not been characterized.</li>
+      <li>The buoyancy engine's 50&nbsp;mL allowance and the craft mass were set and checked by trial, not by a formal buoyancy budget. Displacement was not measured.</li>
+      <li>The o-ring groove dimensions and the original design files were not retained.</li>
+      <li>The logged dataset from the mission was not retained; the record of the profile is the mission outcome, not the data.</li>
       <li>Effective LoRa range was not measured; the link is verified only at mission distances.</li>
-      <li>Craft mass, displacement, and sensor sample rate were not formally recorded.</li>
+      <li>Sensor sample rate was not formally recorded.</li>
       <li>Single Bar02 sensor with no redundancy; a sensor fault ends the mission.</li>
     </ul>
   </section>
@@ -92,7 +119,7 @@
     <p>Team project, Crush Depth float team. The author owned the programming, the electronics, and the physics and buoyancy side of the craft, and previously served as Float Team Technical Lead, taking the subteam through LoRa communications, ESP32 development, stepper motors and drivers, and board assembly.</p>
   </section>
 
-  <footer class="pgfoot"><span>PERRY · TM-02 · Rev B · 2026-09-01</span><span>J. O. Jackson</span></footer>
+  <footer class="pgfoot"><span>PERRY · TM-02 · Rev C · 2026-09-02</span><span>J. O. Jackson</span></footer>
 
 </article>
 </body>
