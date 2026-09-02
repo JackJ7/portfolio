@@ -268,10 +268,17 @@ ol.refs li { margin-bottom: 5px; }
 }
 
 @media print {
-  .cv-head h1 { font-size: 22pt; }
-  .cv-sec h2 { font-size: 11pt; }
-  .cv-row .lbl, .cv-row .body .meta, .cv-head .contact { font-size: 9.5pt; }
-  .cv-sec { break-inside: avoid; }
+  /* The CV must fit one letter page. */
+  .cv { font-size: 10pt; line-height: 1.3; }
+  .cv-head { padding-bottom: 4px; margin-bottom: 3px; }
+  .cv-head h1 { font-size: 20pt; }
+  .cv-tagline { font-size: 10pt; margin-bottom: 10px; }
+  .cv-sec { margin-top: 10px; break-inside: avoid; }
+  .cv-sec h2 { font-size: 10pt; margin-bottom: 5px; padding-bottom: 2px; }
+  .cv-row { margin-bottom: 4px; grid-template-columns: 1.3in 1fr; }
+  .cv-row .body p { margin-bottom: 0; }
+  .cv-row .lbl, .cv-row .body .meta, .cv-head .contact { font-size: 9pt; }
+  .cv .pgfoot { margin-top: 14px; }
 }
 
 /* --------------------------------------------------------------------------
