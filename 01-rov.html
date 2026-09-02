@@ -3,155 +3,102 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ROV — Crush Depth · J. O. Jackson</title>
-<meta name="description" content="Crush Depth ROV: underwater remotely operated vehicle for the MATE ROV World Championship. Custom manipulator, printed chassis and housings, pilot-first control architecture.">
+<title>TM-01 Crush Depth ROV · J. O. Jackson</title>
+<meta name="description" content="Technical memorandum: Crush Depth ROV, an underwater remotely operated vehicle for the MATE ROV World Championship. Printed chassis and housings, custom manipulator, pilot-first control architecture.">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<div class="sheet">
+<article class="memo">
 
-  <header class="doc-header">
-    <div class="doc-id">DS-01</div>
-    <div class="doc-title">
-      <h1>ROV — CRUSH DEPTH</h1>
-      <p class="subtitle">Underwater remotely operated vehicle — MATE ROV World Championship</p>
-    </div>
-    <div class="doc-rev">
-      <span class="rev-letter">REV A</span><br>
-      2026-08-27
-    </div>
-  </header>
-
-  <nav class="doc-nav" aria-label="Datasheet index">
-    <a href="index.html">INDEX</a>
-    <a href="01-rov.html" aria-current="page">01 ROV</a>
-    <a href="02-perry.html">02 PERRY</a>
+  <nav class="site-nav" aria-label="Memorandum index">
+    <a href="index.html">Index</a>
+    <a href="01-rov.html" aria-current="page">TM-01 ROV</a>
+    <a href="02-perry.html">TM-02 PERRY</a>
   </nav>
 
-  <div class="doc-body">
-    <div class="prose">
+  <div class="runhead"><span>TM-01 · Rev A</span><span>J. O. Jackson · 2026-08-27</span></div>
 
-      <section>
-        <h2><span class="sec-no">1</span>OVERVIEW</h2>
-        <p>Crush Depth's ROV is an underwater remotely operated vehicle built for
-        the MATE ROV competition, where it performs simulated environmental
-        research and industrial inspection tasks. The team — roughly 47 members
-        of Clovis Community College's Engineering Renaissance Club — competed at
-        the MATE ROV World Championship in 2025 and 2026.</p>
-        <figure class="figure pending">
-          <div class="frame"><span class="pending-tag">IMAGE PENDING</span></div>
-          <figcaption><span class="fig-no">FIG. 1</span>ROV, general arrangement.</figcaption>
-        </figure>
-      </section>
+  <header>
+    <div class="kind">Technical Memorandum</div>
+    <h1>Crush Depth ROV: Mechanical, Electrical, and Control Design of a Competition Remotely Operated Vehicle</h1>
+    <div class="sub">MATE ROV World Championship, 2025 and 2026</div>
+    <div class="authors">J. O. Jackson<small>Crush Depth, Engineering Renaissance Club, Clovis Community College</small></div>
 
-      <section>
-        <h2><span class="sec-no">2</span>MECHANICAL DESIGN</h2>
-        <p>The vehicle's structure is custom, printed FDM on Bambu Lab machines
-        and modeled in SolidWorks: an outer chassis, an internal housing that
-        carries the electronics stack, and a TPU foam ballast printed to shape.
-        A custom manipulator, designed against the competition's mission tasks,
-        is the vehicle's working end.</p>
-        <p>Waterproofing is handled as a vehicle-level strategy rather than a
-        per-part fix — every penetration, housing, and connector has to hold at
-        mission depth for the vehicle to score at all.</p>
-        <figure class="figure pending">
-          <div class="frame"><span class="pending-tag">IMAGE PENDING</span></div>
-          <figcaption><span class="fig-no">FIG. 2</span>Manipulator and chassis —
-          CAD or build photo.</figcaption>
-        </figure>
-      </section>
+    <p class="abstract"><b>Abstract.</b> Crush Depth's ROV is an underwater remotely operated vehicle built for the MATE ROV competition, where it performs simulated environmental-research and industrial-inspection tasks. The structure is custom, modeled in SolidWorks and FDM-printed: an outer chassis, an internal housing for the electronics stack, a TPU foam ballast printed to shape, and a manipulator designed against the mission tasks. A Raspberry Pi 5 drives the thrusters through ESCs and a PCA9685 PWM driver, with an MPU6050 IMU for attitude and cameras for the pilot; power is stepped down from the tether through multiple buck converters. The C++ control architecture is laid out for pilot ergonomics under mission time pressure. The team competed at the World Championship in 2025 and 2026; the author received the Engineering Presentation MVP award in 2026. Unquantified aspects of the design are stated in Section&nbsp;6.</p>
+    <div class="kw"><i>Keywords:</i> remotely operated vehicle, FDM chassis, waterproofing, manipulator, Raspberry Pi 5, PCA9685, pilot ergonomics</div>
+  </header>
 
-      <section>
-        <h2><span class="sec-no">3</span>ELECTRONICS &amp; POWER</h2>
-        <p>A Raspberry Pi 5 is the vehicle computer, driving thrusters through
-        ESCs via a PCA9685 PWM driver, with an MPU6050 IMU for attitude sensing
-        and camera systems for the pilot. Power distribution runs through
-        multiple buck converters stepping the tether supply down to the rails
-        the electronics need.</p>
-      </section>
+  <section>
+    <h2><span class="n">1</span>Introduction</h2>
+    <p>The MATE ROV competition scores a vehicle on mission tasks performed underwater by a pilot at the surface. The team, roughly 47 members of Clovis Community College's Engineering Renaissance Club, competed at the MATE ROV World Championship in 2025 and 2026. This memorandum records the vehicle's mechanical structure, its electrical and power system, and the control architecture, and states what was and was not characterized.</p>
+    <figure class="fig pending">
+      <div class="box">Figure slot: general arrangement of the vehicle, photograph or CAD isometric.</div>
+      <figcaption class="cap"><b>Figure 1.</b> ROV, general arrangement.</figcaption>
+    </figure>
+  </section>
 
-      <section>
-        <h2><span class="sec-no">4</span>CONTROL SOFTWARE</h2>
-        <p>The control architecture (C++) is designed around pilot ergonomics:
-        the layout of controls and behaviors is chosen for ease of piloting
-        under mission time pressure, rather than for a clean mapping to
-        actuators. Mission scores depend on what the pilot can actually execute.</p>
-      </section>
+  <section>
+    <h2><span class="n">2</span>Mechanical Design</h2>
+    <p>The vehicle's structure is custom, modeled in SolidWorks and printed FDM on Bambu Lab machines: an outer chassis, an internal housing that carries the electronics stack, and a TPU foam ballast printed to shape. A custom manipulator, designed against the competition's mission tasks, is the vehicle's working end.</p>
+    <p>Waterproofing is handled as a vehicle-level strategy rather than a per-part fix. Every penetration, housing, and connector has to hold at mission depth for the vehicle to score at all.</p>
+    <figure class="fig pending">
+      <div class="box">Figure slot: manipulator and chassis, CAD view or build photograph.</div>
+      <figcaption class="cap"><b>Figure 2.</b> Manipulator and chassis.</figcaption>
+    </figure>
+  </section>
 
-      <section>
-        <h2><span class="sec-no">5</span>ROLE &amp; ATTRIBUTION</h2>
-        <p>The author is Co-CEO / CTO of Crush Depth, co-managing the team with
-        Luke Salazar, and owns the electrical and software domains — promoted
-        from Float Team Technical Lead. Operations at this scale are their own
-        engineering problem: Gantt scheduling, BOM management, and a leadership
-        structure deliberately modeled on a company per MATE guidelines.</p>
-        <p>At the 2026 World Championship the author won the
-        <strong>Engineering Presentation MVP</strong> award.</p>
-      </section>
-
-      <section class="limitations">
-        <h2><span class="sec-no">6</span>KNOWN LIMITATIONS</h2>
-        <ul>
-          <li>The vehicle's total power budget was never formally characterized;
-          converter sizing was validated by operation, not analysis.</li>
-          <li>Manipulator payload capacity is unquantified.</li>
-          <li>The hardware is currently not accessible to the author; figures on
-          this sheet are limited to what was documented at build time.</li>
-        </ul>
-      </section>
-
+  <section>
+    <h2><span class="n">3</span>Electronics and Power</h2>
+    <p>A Raspberry Pi 5 is the vehicle computer. It drives the thrusters through ESCs via a PCA9685 PWM driver, reads an MPU6050 IMU for attitude sensing, and carries the camera systems for the pilot. Power distribution runs through multiple buck converters stepping the tether supply down to the rails the electronics need.</p>
+    <div class="tabwrap">
+      <table>
+        <caption><b>Table 1.</b> System summary.</caption>
+        <thead><tr><th>Subsystem</th><th>Component</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Vehicle computer</td><td>Raspberry Pi 5</td><td>control software in C++</td></tr>
+          <tr><td>Thruster drive</td><td>ESCs via PCA9685 PWM driver</td><td>—</td></tr>
+          <tr><td>Attitude</td><td>MPU6050 IMU</td><td>—</td></tr>
+          <tr><td>Vision</td><td>camera systems</td><td>pilot view</td></tr>
+          <tr><td>Power</td><td>buck converters from tether supply</td><td>multiple rails</td></tr>
+          <tr><td>Structure</td><td>FDM chassis, housing, TPU ballast</td><td>SolidWorks; Bambu Lab printers</td></tr>
+          <tr><td>End effector</td><td>custom manipulator</td><td>designed against mission tasks</td></tr>
+        </tbody>
+      </table>
     </div>
+  </section>
 
-    <aside class="spec-rail">
-      <div class="measured">
-        <span class="label">Competition record</span>
-        <div class="value">MATE Worlds 2025 · 2026</div>
-        <span class="note">Engineering Presentation MVP, 2026</span>
-      </div>
+  <section>
+    <h2><span class="n">4</span>Control Software</h2>
+    <p>The control architecture, written in C++, is designed around pilot ergonomics: the layout of controls and behaviors is chosen for ease of piloting under mission time pressure, rather than for a clean mapping to actuators. Mission scores depend on what the pilot can actually execute.</p>
+  </section>
 
-      <div class="spec-block">
-        <h3>Mechanical</h3>
-        <dl>
-          <div class="row"><dt>CAD</dt><dd>SolidWorks</dd></div>
-          <div class="row"><dt>Process</dt><dd>FDM, Bambu Lab</dd></div>
-          <div class="row"><dt>Chassis</dt><dd>custom, printed</dd></div>
-          <div class="row"><dt>Ballast</dt><dd>printed TPU foam</dd></div>
-          <div class="row"><dt>End effector</dt><dd>custom manipulator</dd></div>
-        </dl>
-      </div>
+  <section>
+    <h2><span class="n">5</span>Team and Role</h2>
+    <p>The author is Co-CEO / CTO of Crush Depth, co-managing the team with Luke Salazar, and owns the electrical and software domains, promoted from Float Team Technical Lead. Operations at this scale are their own engineering problem: Gantt scheduling, BOM management, and a leadership structure deliberately modeled on a company per MATE guidelines.</p>
+    <p>At the 2026 World Championship the author won the <strong>Engineering Presentation MVP</strong> award.</p>
+  </section>
 
-      <div class="spec-block">
-        <h3>Electronics</h3>
-        <dl>
-          <div class="row"><dt>Computer</dt><dd>Raspberry Pi 5</dd></div>
-          <div class="row"><dt>PWM driver</dt><dd>PCA9685</dd></div>
-          <div class="row"><dt>IMU</dt><dd>MPU6050</dd></div>
-          <div class="row"><dt>Propulsion</dt><dd>thrusters + ESCs</dd></div>
-          <div class="row"><dt>Power</dt><dd>buck converter rails</dd></div>
-          <div class="row"><dt>Vision</dt><dd>camera systems</dd></div>
-        </dl>
-      </div>
+  <section>
+    <h2><span class="n">6</span>Known Limitations</h2>
+    <ul>
+      <li>The vehicle's total power budget was never formally characterized; converter sizing was validated by operation, not analysis.</li>
+      <li>Manipulator payload capacity is unquantified.</li>
+      <li>The hardware is currently not accessible to the author; figures in this memorandum are limited to what was documented at build time.</li>
+    </ul>
+  </section>
 
-      <div class="spec-block">
-        <h3>Team</h3>
-        <dl>
-          <div class="row"><dt>Org</dt><dd>Engineering Renaissance Club</dd></div>
-          <div class="row"><dt>Size</dt><dd>~47 members</dd></div>
-          <div class="row"><dt>Author role</dt><dd>Co-CEO / CTO</dd></div>
-          <div class="row"><dt>Domains owned</dt><dd>electrical · software</dd></div>
-          <div class="row"><dt>Software</dt><dd>C++</dd></div>
-        </dl>
-      </div>
-    </aside>
-  </div>
+  <section>
+    <h2>References</h2>
+    <ol class="refs">
+      <li>MATE ROV Competition, competition manual and mission specification, 2025 and 2026 seasons.</li>
+      <li>NXP Semiconductors, <i>PCA9685 16-channel, 12-bit PWM Fm+ I²C-bus LED controller</i>, datasheet.</li>
+      <li>InvenSense, <i>MPU-6050 Product Specification</i>.</li>
+      <li>Raspberry Pi Ltd, <i>Raspberry Pi 5 product brief</i>.</li>
+    </ol>
+  </section>
 
-  <footer class="title-block">
-    <div class="cell"><span class="k">Title</span><span class="v">ROV — Crush Depth</span></div>
-    <div class="cell"><span class="k">Drawn by</span><span class="v">J. O. Jackson</span></div>
-    <div class="cell"><span class="k">Doc / Rev</span><span class="v">DS-01 · A</span></div>
-    <div class="cell"><span class="k">Sheet</span><span class="v">01</span></div>
-  </footer>
+  <footer class="pgfoot"><span>Crush Depth ROV · TM-01 · Rev A</span><span>J. O. Jackson</span></footer>
 
-</div>
+</article>
 </body>
 </html>

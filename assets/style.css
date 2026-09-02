@@ -1,34 +1,31 @@
 /* ==========================================================================
-   Datasheet stylesheet — shared by every page (00–05).
-   System: paper white, abyssal-teal ink, safety-amber accent.
-   Type: IBM Plex Sans for prose; JetBrains Mono for data, labels, numbers.
-   Print-to-PDF is a first-class target.
+   Technical memorandum stylesheet — shared by every page (00–05).
+   Model: a letter-size lab memo set in Computer Modern. One column, numbered
+   sections, captioned figures and tables, references, page footer.
+   Ink on paper. Print-to-PDF is a first-class target.
+   Type: CMU Serif (OFL) for everything; JetBrains Mono only for identifiers
+   that would be typeset in \texttt{} — pin names, file names, registers.
    ========================================================================== */
 
 @font-face {
-  font-family: "IBM Plex Sans";
-  src: url("fonts/IBMPlexSans-Regular.woff2") format("woff2");
+  font-family: "CMU Serif";
+  src: url("fonts/cmu-serif-500-roman.woff2") format("woff2");
   font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
-  font-family: "IBM Plex Sans";
-  src: url("fonts/IBMPlexSans-Italic.woff2") format("woff2");
+  font-family: "CMU Serif";
+  src: url("fonts/cmu-serif-500-italic.woff2") format("woff2");
   font-weight: 400; font-style: italic; font-display: swap;
 }
 @font-face {
-  font-family: "IBM Plex Sans";
-  src: url("fonts/IBMPlexSans-Medium.woff2") format("woff2");
-  font-weight: 500; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "IBM Plex Sans";
-  src: url("fonts/IBMPlexSans-SemiBold.woff2") format("woff2");
-  font-weight: 600; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "IBM Plex Sans";
-  src: url("fonts/IBMPlexSans-Bold.woff2") format("woff2");
+  font-family: "CMU Serif";
+  src: url("fonts/cmu-serif-700-roman.woff2") format("woff2");
   font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "CMU Serif";
+  src: url("fonts/cmu-serif-700-italic.woff2") format("woff2");
+  font-weight: 700; font-style: italic; font-display: swap;
 }
 @font-face {
   font-family: "JetBrains Mono";
@@ -40,313 +37,195 @@
   src: url("fonts/JetBrainsMono-Bold.woff2") format("woff2");
   font-weight: 700; font-style: normal; font-display: swap;
 }
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("fonts/JetBrainsMono-ExtraBold.woff2") format("woff2");
-  font-weight: 800; font-style: normal; font-display: swap;
-}
 
 :root {
-  --paper: #fbfbf8;
-  --ink: #17444a;        /* abyssal teal, text weight */
-  --ink-deep: #0a2e33;   /* headings, doc numbers */
-  --ink-mid: #5a7d81;    /* labels, secondary text */
-  --rule: #ccd8d6;       /* hairline rules */
-  --rule-strong: #17444a;
-  --amber: #e39b00;      /* safety amber — measured results, rev block */
-  --amber-deep: #9a6a00;
-  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --desk: #e4e3df;       /* screen only: the surface the sheet sits on */
+  --paper: #ffffff;
+  --ink: #111111;
+  --ink-soft: #4a4a46;   /* running head, captions' secondary text */
+  --rule: #111111;
+  --link: #1f3f8f;       /* hyperref-style dark blue, the one colour on the page */
+  --slot: #f7f7f4;       /* reserved figure slot fill */
+  --serif: "CMU Serif", "Latin Modern Roman", "Times New Roman", Times, serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.7;
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.42;
   color: var(--ink);
+  background: var(--desk);
+}
+
+/* The sheet: one letter page, on screen and in print. */
+.memo {
+  max-width: 8.5in;
+  margin: 36px auto 64px;
+  padding: 0.85in 1in 0.9in;
   background: var(--paper);
+  box-shadow: 0 1px 0 #c9c8c3, 0 14px 32px rgba(0, 0, 0, 0.13);
 }
 
-.sheet {
-  max-width: 960px;
-  margin: 48px auto 64px;
-  padding: 0 24px;
-}
+a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
 
-a { color: var(--ink-deep); text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-a:hover { color: var(--amber-deep); }
-a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+code, .tt { font-family: var(--mono); font-size: 0.86em; }
 
 /* --------------------------------------------------------------------------
-   Document header: doc number | title block | revision
+   Site navigation (screen only) and running head
    -------------------------------------------------------------------------- */
 
-.doc-header {
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.site-nav a { color: var(--ink-soft); text-decoration: none; }
+.site-nav a:hover { color: var(--ink); text-decoration: underline; }
+.site-nav a[aria-current="page"] { color: var(--ink); font-weight: 700; }
+
+.runhead {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  gap: 20px;
-  padding-bottom: 14px;
-  border-bottom: 3px solid var(--rule-strong);
+  gap: 16px;
+  font-size: 12.5px;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  border-bottom: 0.5pt solid var(--rule);
+  padding-bottom: 4px;
+  margin-bottom: 28px;
 }
-
-.doc-id {
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink-mid);
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-}
-
-.doc-title h1 {
-  font-size: 34px;
-  font-weight: 700;
-  color: var(--ink-deep);
-  letter-spacing: 0.01em;
-  line-height: 1.15;
-}
-
-.doc-title .subtitle {
-  font-size: 14px;
-  color: var(--ink-mid);
-  margin-top: 5px;
-}
-
-.doc-rev {
-  font-family: var(--mono);
-  font-size: 11px;
-  text-align: right;
-  color: var(--ink-mid);
-  white-space: nowrap;
-}
-.doc-rev .rev-letter {
-  display: inline-block;
-  font-weight: 800;
-  font-size: 13px;
-  color: var(--ink-deep);
-  border: 2px solid var(--amber);
-  padding: 1px 9px;
-  margin-bottom: 5px;
-}
-
-.doc-nav {
-  display: flex;
-  gap: 22px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--rule);
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-}
-.doc-nav a { text-decoration: none; color: var(--ink-mid); }
-.doc-nav a:hover, .doc-nav a[aria-current="page"] { color: var(--ink-deep); }
-.doc-nav a[aria-current="page"] { font-weight: 700; border-bottom: 2px solid var(--amber); }
 
 /* --------------------------------------------------------------------------
-   Two-column body: prose sections + spec rail
+   Title block: kind, title, subtitle, author, abstract, keywords
    -------------------------------------------------------------------------- */
 
-.doc-body {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 0 44px;
-  margin-top: 32px;
-}
-
-.prose { min-width: 0; max-width: 60ch; }
-
-section { margin-bottom: 34px; }
-
-section h2 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ink-deep);
-  letter-spacing: 0.09em;
+.kind {
+  font-size: 13.5px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 6px;
-  margin-bottom: 12px;
-}
-section h2 .sec-no {
-  font-family: var(--mono);
-  color: var(--ink-mid);
-  margin-right: 12px;
+  color: var(--ink-soft);
+  text-align: center;
 }
 
-section p { margin-bottom: 12px; }
-section p:last-child { margin-bottom: 0; }
+h1 {
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
+  margin: 8px 0 6px;
+}
 
-section ul { margin: 0 0 12px 20px; }
-section li { margin-bottom: 6px; }
+.sub {
+  text-align: center;
+  font-size: 17px;
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+.authors { text-align: center; font-size: 16px; }
+.authors small { display: block; font-size: 13.5px; color: var(--ink-soft); margin-top: 2px; }
+
+.abstract {
+  margin: 24px 0.45in 8px;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: justify;
+  hyphens: auto;
+}
+.abstract b { font-variant: small-caps; letter-spacing: 0.06em; margin-right: 6px; }
+
+.kw { margin: 0 0.45in 26px; font-size: 14px; color: var(--ink-soft); }
+
+/* --------------------------------------------------------------------------
+   Body text: numbered sections
+   -------------------------------------------------------------------------- */
+
+section { margin-top: 22px; }
+
+h2 { font-size: 17.5px; font-weight: 700; margin: 0 0 7px; }
+h2 .n { display: inline-block; min-width: 1.6em; }
+
+p { margin: 0 0 10px; text-align: justify; hyphens: auto; }
+p:last-child { margin-bottom: 0; }
+
+ul, ol { margin: 0 0 10px 1.5em; }
+li { margin-bottom: 4px; }
 
 em { font-style: italic; }
-strong { font-weight: 600; color: var(--ink-deep); }
+strong { font-weight: 700; }
 
-/* Spec rail — data lives in mono */
-.spec-rail { font-size: 12px; }
-
-.spec-block {
-  border: 1px solid var(--rule);
-  border-top: 3px solid var(--rule-strong);
-  margin-bottom: 22px;
-  background: #fff;
-}
-.spec-block h3 {
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--ink-deep);
-  padding: 8px 12px 6px;
-  border-bottom: 1px solid var(--rule);
-}
-.spec-block dl { padding: 6px 12px 10px; font-family: var(--mono); }
-.spec-block .row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 4px 0;
-  border-bottom: 1px dotted var(--rule);
-}
-.spec-block .row:last-child { border-bottom: none; }
-.spec-block dt { color: var(--ink-mid); flex-shrink: 0; }
-.spec-block dd { text-align: right; font-weight: 700; color: var(--ink-deep); overflow-wrap: anywhere; }
-
-/* Measured result — the amber moment. Used only for verified numbers. */
-.measured {
-  border: 1px solid var(--amber);
-  border-left: 6px solid var(--amber);
-  padding: 12px 14px;
-  margin-bottom: 22px;
-  background: #fff;
-}
-.measured .label {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--amber-deep);
-}
-.measured .value {
-  font-family: var(--mono);
-  font-size: 19px;
-  font-weight: 800;
-  color: var(--ink-deep);
-  line-height: 1.35;
-  margin: 2px 0;
-}
-.measured .note { font-size: 12.5px; color: var(--ink-mid); line-height: 1.5; display: block; }
-
-/* Figures. `.pending` marks a reserved frame awaiting a real photo/render;
-   pending frames are hidden in print so application PDFs never show a blank. */
-.figure { margin: 14px 0 4px; }
-.figure .frame {
-  border: 1px solid var(--rule);
-  background:
-    repeating-linear-gradient(45deg, rgba(23, 68, 74, 0.045) 0 10px, transparent 10px 20px),
-    #fff;
-  aspect-ratio: 16 / 7;
+/* Figures. `.pending` marks a reserved slot awaiting a photo, plot, or CAD
+   view; pending figures are hidden in print so PDFs never carry a blank. */
+.fig { margin: 16px 0 18px; }
+.fig .box {
+  border: 0.5pt solid var(--ink-soft);
+  background: var(--slot);
+  width: 100%;
+  aspect-ratio: 16 / 8;
   display: grid;
   place-items: center;
+  padding: 12px;
+  font-size: 13.5px;
+  font-style: italic;
+  color: var(--ink-soft);
+  text-align: center;
 }
-.figure .frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.figure .frame .pending-tag {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--ink-mid);
-  border: 1px dashed var(--rule);
-  background: var(--paper);
-  padding: 4px 12px;
+.fig img, .fig svg { width: 100%; height: auto; display: block; }
+.fig .cap { font-size: 13.5px; line-height: 1.35; margin-top: 7px; }
+.fig .cap b { font-weight: 700; }
+
+/* Tables: booktabs rules only, no vertical lines, no shading. */
+.tabwrap { margin: 10px 0 16px; overflow-x: auto; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14.5px;
+  font-variant-numeric: tabular-nums;
 }
-.figure figcaption {
+caption { caption-side: top; text-align: left; font-size: 13.5px; margin-bottom: 6px; }
+caption b { font-weight: 700; }
+th, td { padding: 4px 8px; text-align: left; vertical-align: top; }
+th:first-child, td:first-child { padding-left: 0; }
+th:last-child, td:last-child { padding-right: 0; }
+thead th { border-top: 1pt solid var(--rule); border-bottom: 0.5pt solid var(--rule); font-weight: 700; }
+tbody tr:last-child td { border-bottom: 1pt solid var(--rule); }
+
+/* References */
+ol.refs { font-size: 14.5px; margin-left: 1.7em; }
+ol.refs li { margin-bottom: 5px; }
+
+/* Page footer */
+.pgfoot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
   font-size: 12.5px;
-  color: var(--ink-mid);
-  margin-top: 7px;
-  line-height: 1.5;
+  color: var(--ink-soft);
+  border-top: 0.5pt solid var(--rule);
+  padding-top: 4px;
+  margin-top: 36px;
 }
-.figure figcaption .fig-no { font-family: var(--mono); font-weight: 700; color: var(--ink-deep); margin-right: 8px; }
-
-/* Known limitations — deliberate, high-signal. Never soften. */
-.limitations {
-  border: 1px solid var(--rule-strong);
-  background: #fff;
-}
-.limitations h2 {
-  background: var(--ink-deep);
-  color: var(--paper);
-  border-bottom: none;
-  padding: 8px 14px;
-  margin-bottom: 0;
-}
-.limitations h2 .sec-no { color: var(--amber); }
-.limitations ul { margin: 0; padding: 12px 16px 12px 34px; }
-
-/* Data tables (capability matrix, index table) */
-table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
-th, td { border: 1px solid var(--rule); padding: 8px 11px; text-align: left; vertical-align: top; }
-th {
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--ink-deep);
-  background: rgba(23, 68, 74, 0.045);
-}
-td.num { font-family: var(--mono); font-size: 12.5px; font-weight: 700; }
-
-/* --------------------------------------------------------------------------
-   Title block footer — engineering-drawing style
-   -------------------------------------------------------------------------- */
-
-.title-block {
-  margin-top: 44px;
-  border: 2px solid var(--rule-strong);
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  background: #fff;
-}
-.title-block .cell {
-  border-right: 1px solid var(--rule-strong);
-  padding: 6px 10px 7px;
-}
-.title-block .cell:last-child { border-right: none; }
-.title-block .cell .k {
-  display: block;
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-mid);
-}
-.title-block .cell .v { font-weight: 700; color: var(--ink-deep); }
 
 /* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
 
 @media (max-width: 720px) {
-  body { font-size: 14.5px; }
-  .sheet { margin-top: 20px; padding: 0 16px; }
-  .doc-header { flex-wrap: wrap; align-items: baseline; }
-  .doc-title { order: -1; flex-basis: 100%; }
-  .doc-title h1 { font-size: 26px; }
-  .doc-body { grid-template-columns: 1fr; }
-  .prose { max-width: none; }
-  .spec-rail { order: -1; margin-bottom: 10px; }
-  .title-block { grid-template-columns: 1fr 1fr; }
-  .title-block .cell { border-bottom: 1px solid var(--rule-strong); }
-  .title-block .cell:nth-child(2n) { border-right: none; }
-  .title-block .cell:nth-last-child(-n+2) { border-bottom: none; }
-  table { display: block; overflow-x: auto; }
+  body { font-size: 15.5px; }
+  .memo { margin: 0 0 32px; padding: 22px 18px 32px; box-shadow: none; }
+  .abstract, .kw { margin-left: 0; margin-right: 0; }
+  p, .abstract { text-align: left; hyphens: manual; }
+  h1 { font-size: 23px; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -354,23 +233,22 @@ td.num { font-family: var(--mono); font-size: 12.5px; font-weight: 700; }
 }
 
 /* --------------------------------------------------------------------------
-   Print — hard requirement. Ink on paper, no nav.
+   Print — hard requirement. The memo is the page.
    -------------------------------------------------------------------------- */
 
-@page { margin: 14mm 12mm; }
+@page { size: letter; margin: 0.75in 0.85in; }
 
 @media print {
-  body { background: #fff; font-size: 11.5px; }
-  .sheet { max-width: none; margin: 0; padding: 0; }
-  .doc-nav { display: none; }
-  .figure.pending { display: none; }
-  section, .spec-block, .measured, .title-block { break-inside: avoid; }
-  .limitations h2 {
-    background: none;
-    color: var(--ink-deep);
-    border-bottom: 2px solid var(--ink-deep);
-    padding: 8px 0;
-  }
-  .limitations { border-color: var(--ink-deep); }
-  a { text-decoration: none; color: inherit; }
+  body { background: #fff; font-size: 11pt; line-height: 1.38; }
+  .memo { max-width: none; margin: 0; padding: 0; box-shadow: none; }
+  .site-nav { display: none; }
+  .fig.pending { display: none; }
+  h1 { font-size: 18pt; }
+  .sub { font-size: 12pt; }
+  h2 { font-size: 12pt; }
+  .abstract { font-size: 10pt; }
+  .kw, .fig .cap, caption, .runhead, .pgfoot, ol.refs, table { font-size: 9.5pt; }
+  section, .fig, .tabwrap { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  a { color: inherit; text-decoration: none; }
 }

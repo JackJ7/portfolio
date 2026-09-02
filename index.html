@@ -3,86 +3,61 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>J. O. Jackson — Engineering Datasheets</title>
-<meta name="description" content="Project datasheets — Jack O. Jackson, mechanical engineering (robotics &amp; controls), UC Irvine.">
+<title>J. O. Jackson — Technical Memoranda</title>
+<meta name="description" content="Technical memoranda by Jack O. Jackson, mechanical engineering (robotics and controls), UC Irvine. Competition ROV, profiling float, and further projects in preparation.">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<div class="sheet">
+<article class="memo">
 
-  <header class="doc-header">
-    <div class="doc-id">DS-00</div>
-    <div class="doc-title">
-      <h1>JACK O. JACKSON</h1>
-      <p class="subtitle">Mechanical Engineering — Robotics &amp; Controls · UC Irvine, Fall 2026</p>
-    </div>
-    <div class="doc-rev">
-      <span class="rev-letter">REV A</span><br>
-      2026-08-27
-    </div>
+  <nav class="site-nav" aria-label="Memorandum index">
+    <a href="index.html" aria-current="page">Index</a>
+    <a href="01-rov.html">TM-01 ROV</a>
+    <a href="02-perry.html">TM-02 PERRY</a>
+  </nav>
+
+  <div class="runhead"><span>TM-00 · Rev A</span><span>J. O. Jackson · 2026-08-27</span></div>
+
+  <header>
+    <div class="kind">Technical Memoranda</div>
+    <h1>Jack O. Jackson</h1>
+    <div class="sub">Mechanical Engineering, Robotics and Controls · UC Irvine, Fall 2026</div>
+    <div class="authors"><a href="mailto:jackoj@uci.edu">jackoj@uci.edu</a><small><a href="https://linkedin.com/in/jackjackson2">linkedin.com/in/jackjackson2</a></small></div>
+
+    <p class="abstract"><b>Summary.</b> This series documents the author's engineering projects in the form of short technical memoranda. Each memorandum records the design, what was measured, and what was not. Two are issued; three are in preparation.</p>
   </header>
 
-  <div class="doc-body">
-    <div class="prose">
-
-      <section>
-        <h2><span class="sec-no">1</span>PROJECT INDEX</h2>
-        <table>
-          <thead>
-            <tr><th>No.</th><th>Project</th><th>Domain</th><th>Outcome</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="num"><a href="01-rov.html">01</a></td>
-              <td><a href="01-rov.html">ROV — Crush Depth</a></td>
-              <td>Underwater vehicle</td>
-              <td>MATE ROV World Championship 2025 &amp; 2026; Engineering Presentation MVP 2026</td>
-            </tr>
-            <tr>
-              <td class="num"><a href="02-perry.html">02</a></td>
-              <td><a href="02-perry.html">PERRY</a></td>
-              <td>Profiling float</td>
-              <td>Profiled to 4&nbsp;m, resurfaced, transmitted logged data</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section>
-        <h2><span class="sec-no">2</span>REVISION NOTE</h2>
-        <p>Additional sheets — 03 Doc Ock (tendon-driven spiral gripper),
-        04 CLARK (cycloidal-gearbox robotic arm), and 05 capability matrix —
-        are in preparation for a later revision of this index.</p>
-      </section>
-
+  <section>
+    <h2><span class="n">1</span>Issued Memoranda</h2>
+    <div class="tabwrap">
+      <table>
+        <caption><b>Table 1.</b> Memoranda issued to date.</caption>
+        <thead><tr><th>No.</th><th>Title</th><th>Subject</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>TM-01</td>
+            <td><a href="01-rov.html">Crush Depth ROV</a></td>
+            <td>Underwater remotely operated vehicle</td>
+            <td>MATE ROV World Championship 2025 and 2026; Engineering Presentation MVP, 2026</td>
+          </tr>
+          <tr>
+            <td>TM-02</td>
+            <td><a href="02-perry.html">PERRY</a></td>
+            <td>Vertical profiling float</td>
+            <td>Profiled to 4&nbsp;m in open water, resurfaced, and transmitted logged data</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </section>
 
-    <aside class="spec-rail">
-      <div class="spec-block">
-        <h3>Contact</h3>
-        <dl>
-          <div class="row"><dt>Email</dt><dd><a href="mailto:jackoj@uci.edu">jackoj@uci.edu</a></dd></div>
-          <div class="row"><dt>LinkedIn</dt><dd><a href="https://linkedin.com/in/jackjackson2">in/jackjackson2</a></dd></div>
-        </dl>
-      </div>
-      <div class="spec-block">
-        <h3>Document</h3>
-        <dl>
-          <div class="row"><dt>Revision</dt><dd>A</dd></div>
-          <div class="row"><dt>Date</dt><dd>2026-08-27</dd></div>
-          <div class="row"><dt>Sheets</dt><dd>3</dd></div>
-        </dl>
-      </div>
-    </aside>
-  </div>
+  <section>
+    <h2><span class="n">2</span>In Preparation</h2>
+    <p>TM-03 Doc Ock (tendon-driven spiral gripper), TM-04 CLARK (cycloidal-gearbox robotic arm), and TM-05, a capability matrix across the series, will be added to this index in a later revision.</p>
+  </section>
 
-  <footer class="title-block">
-    <div class="cell"><span class="k">Title</span><span class="v">Engineering Datasheets — Index</span></div>
-    <div class="cell"><span class="k">Drawn by</span><span class="v">J. O. Jackson</span></div>
-    <div class="cell"><span class="k">Doc / Rev</span><span class="v">DS-00 · A</span></div>
-    <div class="cell"><span class="k">Sheet</span><span class="v">00</span></div>
-  </footer>
+  <footer class="pgfoot"><span>Index · TM-00 · Rev A</span><span>J. O. Jackson</span></footer>
 
-</div>
+</article>
 </body>
 </html>
