@@ -26,7 +26,7 @@
     <div class="sub">Pressure Equipped Robot for Research and Yield</div>
     <div class="authors">J. O. Jackson<small>Crush Depth float team, MATE ROV international competition</small></div>
 
-    <p class="abstract"><b>Abstract.</b> PERRY is a vertical profiling float: on a LoRa activation signal it runs three profiles to a set depth, logging temperature, pressure, and depth, and transmits the record on resurfacing. The hull is acetone-vapor-smoothed ABS closed by static o-rings; field testing showed marine grease admitting water at the seals, and the switch to silicone grease fixed it. A 50&nbsp;mL buoyancy engine moves the craft, which has a mass of roughly 4.5&nbsp;kg. In open water it profiled to 4&nbsp;m, resurfaced, and returned its data. The author owned the programming, the electronics, and the buoyancy design on a team build.</p>
+    <p class="abstract"><b>Abstract.</b> PERRY is a vertical profiling float: on a LoRa activation signal it runs three profiles to a set depth, logging temperature, pressure, and depth, and transmits the record on resurfacing. The hull is acetone-vapor-smoothed ABS closed by static o-rings; field testing showed marine grease admitting water at the seals, and the switch to silicone grease fixed it. A 50&nbsp;mL buoyancy engine moves the craft, which has a mass of about 10&nbsp;lb (4.5&nbsp;kg). In open water it profiled to 4&nbsp;m, resurfaced, and returned its data. The author owned the programming, the electronics, and the buoyancy design on a team build.</p>
   </header>
 
   <section>
@@ -45,7 +45,7 @@
 
   <section>
     <h2><span class="n">2</span>Buoyancy Engine</h2>
-    <p>Depth is driven by a buoyancy engine rather than thrusters. A NEMA17 stepper motor, running through a TMC2209 driver under UART control, changes the craft's displacement by 50&nbsp;mL to move it between the surface and the target depth. The craft has a mass of roughly 4.5&nbsp;kg (10&nbsp;lb). The 50&nbsp;mL allowance was set by estimate against that mass and confirmed by trial rather than by a formal buoyancy calculation; that is recorded as a limitation in Section&nbsp;5.</p>
+    <p>Depth is driven by a buoyancy engine rather than thrusters. A NEMA17 stepper motor, running through a TMC2209 driver under UART control, changes the craft's displacement by 50&nbsp;mL to move it between the surface and the target depth. The craft has a mass of about 10&nbsp;lb (4.5&nbsp;kg). The 50&nbsp;mL allowance was set by estimate against that mass and confirmed by trial rather than by a formal buoyancy calculation; that is recorded as a limitation in Section&nbsp;5.</p>
   </section>
 
   <section>
@@ -61,7 +61,7 @@
           <tr><td>Depth drive</td><td>NEMA17 stepper, TMC2209 driver</td><td>UART; 50 mL displacement change</td></tr>
           <tr><td>Radio</td><td>REYAX RYLR896 LoRa</td><td>UART, 115200 baud</td></tr>
           <tr><td>Hull</td><td>FDM ABS, Bambu Lab printer</td><td>chamber vapor smoothed; static o-rings; silicone grease</td></tr>
-          <tr><td>Mass</td><td>roughly 4.5 kg</td><td>not formally weighed</td></tr>
+          <tr><td>Mass</td><td>about 10 lb (4.5 kg)</td><td>—</td></tr>
           <tr><td>Assembly</td><td>protoboard, hand soldered</td><td>—</td></tr>
         </tbody>
       </table>
@@ -105,7 +105,7 @@
     <h2><span class="n">5</span>Known Limitations</h2>
     <ul>
       <li>Seal integrity is verified to 4&nbsp;m only. Maximum safe operating depth has not been characterized.</li>
-      <li>The buoyancy engine's 50&nbsp;mL allowance and the craft mass were set and checked by trial, not by a formal buoyancy budget. Displacement was not measured.</li>
+      <li>The buoyancy engine's 50&nbsp;mL allowance was set by estimate and checked by trial, not by a formal buoyancy budget. Displacement was not measured.</li>
       <li>The o-ring groove dimensions and the original design files were not retained.</li>
       <li>The logged dataset from the mission was not retained; the record of the profile is the mission outcome, not the data.</li>
       <li>Effective LoRa range was not measured; the link is verified only at mission distances.</li>
