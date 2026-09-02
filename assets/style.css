@@ -136,7 +136,7 @@ h1 {
 .authors small { display: block; font-size: 13.5px; color: var(--ink-soft); margin-top: 2px; }
 
 .abstract {
-  margin: 24px 0.45in 8px;
+  margin: 24px 0.45in 26px;
   font-size: 15px;
   line-height: 1.4;
   text-align: justify;
@@ -144,7 +144,6 @@ h1 {
 }
 .abstract b { font-variant: small-caps; letter-spacing: 0.06em; margin-right: 6px; }
 
-.kw { margin: 0 0.45in 26px; font-size: 14px; color: var(--ink-soft); }
 
 /* --------------------------------------------------------------------------
    Body text: numbered sections
@@ -165,8 +164,10 @@ em { font-style: italic; }
 strong { font-weight: 700; }
 
 /* Figures. `.pending` marks a reserved slot awaiting a photo, plot, or CAD
-   view; pending figures are hidden in print so PDFs never carry a blank. */
+   view. Pending figures are hidden everywhere: the markup stays so a real
+   image can be dropped in, but no reader ever sees an empty frame. */
 .fig { margin: 16px 0 18px; }
+.fig.pending { display: none; }
 .fig .box {
   border: 0.5pt solid var(--ink-soft);
   background: var(--slot);
@@ -269,15 +270,15 @@ ol.refs li { margin-bottom: 5px; }
 
 @media print {
   /* The CV must fit one letter page. */
-  .cv { font-size: 10pt; line-height: 1.3; }
+  .cv { font-size: 9.6pt; line-height: 1.28; }
   .cv-head { padding-bottom: 4px; margin-bottom: 3px; }
   .cv-head h1 { font-size: 20pt; }
   .cv-tagline { font-size: 10pt; margin-bottom: 10px; }
-  .cv-sec { margin-top: 10px; break-inside: avoid; }
+  .cv-sec { margin-top: 8px; break-inside: avoid; }
   .cv-sec h2 { font-size: 10pt; margin-bottom: 5px; padding-bottom: 2px; }
-  .cv-row { margin-bottom: 4px; grid-template-columns: 1.3in 1fr; }
+  .cv-row { margin-bottom: 3px; grid-template-columns: 1.25in 1fr; }
   .cv-row .body p { margin-bottom: 0; }
-  .cv-row .lbl, .cv-row .body .meta, .cv-head .contact { font-size: 9pt; }
+  .cv-row .lbl, .cv-row .body .meta, .cv-head .contact { font-size: 8.7pt; }
   .cv .pgfoot { margin-top: 14px; }
 }
 
@@ -312,7 +313,7 @@ ol.refs li { margin-bottom: 5px; }
   .sub { font-size: 12pt; }
   h2 { font-size: 12pt; }
   .abstract { font-size: 10pt; }
-  .kw, .fig .cap, caption, .runhead, .pgfoot, ol.refs, table { font-size: 9.5pt; }
+  .fig .cap, caption, .runhead, .pgfoot, ol.refs, table { font-size: 9.5pt; }
   section, .fig, .tabwrap { break-inside: avoid; }
   h2 { break-after: avoid; }
   a { color: inherit; text-decoration: none; }

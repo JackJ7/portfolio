@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TM-03 Doc Ock — Spiral Gripper · J. O. Jackson</title>
+<meta name="description" content="Technical memorandum: Doc Ock, a tendon-driven logarithmic-spiral gripper with IMU teleoperation, after the SpiRobs design. Three cables, three steppers, ESP32.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<article class="memo">
+
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Jack O. Jackson</a>
+    <a href="01-rov.html">TM-01 ROV</a>
+    <a href="02-perry.html">TM-02 PERRY</a>
+    <a href="03-doc-ock.html" aria-current="page">TM-03 Doc Ock</a>
+    <a href="04-clark.html">TM-04 CLARK</a>
+    <a href="pdf/TM-03-Doc-Ock.pdf">PDF</a>
+  </nav>
+
+  <div class="runhead"><span>TM-03 · Rev A</span><span>J. O. Jackson · 2026-09-01</span></div>
+
+  <header>
+    <div class="kind">Technical Memorandum</div>
+    <h1>Doc Ock: A Tendon-Driven Logarithmic-Spiral Gripper with IMU Teleoperation</h1>
+    <div class="sub">After the SpiRobs design of Wang, Freris, and Wei [1]</div>
+    <div class="authors">J. O. Jackson and L. Salazar<small>Engineering Renaissance Club, Clovis Community College</small></div>
+
+    <p class="abstract"><b>Abstract.</b> Doc Ock is a gripper shaped as a logarithmic spiral, modeled on an octopus arm and derived from the SpiRobs work [1]. Three independent cables give three degrees of freedom; differential cable tension curls the spiral around an object. An operator drives it by moving a handheld IMU. Luke Salazar led the CAD; the author owned the electronics and firmware. The project is paused with no surviving hardware, and its limitations are stated in Section&nbsp;5.</p>
+  </header>
+
+  <section>
+    <h2><span class="n">1</span>Why a Spiral</h2>
+    <p>A parallel-jaw gripper holds an object at two contact patches and depends on the object presenting two roughly parallel faces. A logarithmic spiral conforms: as the arm curls it wraps the object and contacts it along its length, so irregular and non-uniform objects that defeat parallel jaws can be held. Wang, Freris, and Wei showed the same geometry grasping across more than two orders of magnitude in object size [1]. Doc Ock reproduces that geometry at desk scale with printed links and cable actuation.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span>Mechanical Design</h2>
+    <p>Every link was custom-designed in SolidWorks. Links are joined by TPU interlink plugs, making the arm a multi-material assembly: rigid printed links for the structure and compliant plugs at the joints so the spiral can flex under cable tension and return.</p>
+    <figure class="fig pending">
+      <div class="box">Figure slot: CAD render of the assembled arm.</div>
+      <figcaption class="cap"><b>Figure 1.</b> Doc Ock, assembled arm, CAD render.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span>Actuation</h2>
+    <p>Three cables run the length of the arm, each driven by its own NEMA17 stepper through a TMC2209 driver under UART control. Pulling one cable curls the arm toward it; pulling them differentially sets the curl's direction and tightness. The three cables together give the arm three degrees of freedom.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span>Control</h2>
+    <p>The arm is teleoperated from an MPU6050 IMU held by the operator. An ESP32 reads the IMU and maps its motion to the three motors: translation along X drives motor 1, Y drives motor 2, and Z drives motor 3. The operator moves the IMU and the gripper follows.</p>
+    <div class="tabwrap">
+      <table>
+        <caption><b>Table 1.</b> Teleoperation mapping and system summary.</caption>
+        <thead><tr><th>IMU axis</th><th>Motor</th><th>Drive</th></tr></thead>
+        <tbody>
+          <tr><td>X translation</td><td>motor 1, NEMA17</td><td>TMC2209, UART</td></tr>
+          <tr><td>Y translation</td><td>motor 2, NEMA17</td><td>TMC2209, UART</td></tr>
+          <tr><td>Z translation</td><td>motor 3, NEMA17</td><td>TMC2209, UART</td></tr>
+          <tr><td colspan="3">Controller ESP32; operator input MPU6050 IMU; links SolidWorks, FDM; joints TPU interlink plugs</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span>Known Limitations</h2>
+    <ul>
+      <li>No closed-loop tendon tension feedback. Cable tension is set open-loop by stepper position.</li>
+      <li>Reachable workspace is unquantified.</li>
+      <li>Failure modes under load are uncharacterized.</li>
+      <li>Grip force, object size range, and link count were not recorded.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span>Status and Planned Work</h2>
+    <p>The project is fully paused and no hardware survives. The planned next step was a design optimization study covering reachable workspace, manufacturability, and points of failure.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">7</span>Role and Attribution</h2>
+    <p>Co-contribution with Luke Salazar. Luke led the CAD. The author owned the electronics and firmware, and learned CAD technique from Luke over the course of the build.</p>
+  </section>
+
+  <section>
+    <h2>References</h2>
+    <ol class="refs">
+      <li>Z. Wang, N. M. Freris, and X. Wei, "SpiRobs: Logarithmic spiral-shaped robots for versatile grasping across scales," <i>Device</i>, Cell Press, 2024. arXiv:2303.09861.</li>
+    </ol>
+  </section>
+
+  <footer class="pgfoot"><span>Doc Ock · TM-03 · Rev A · 2026-09-01</span><span>J. O. Jackson</span></footer>
+
+</article>
+</body>
+</html>

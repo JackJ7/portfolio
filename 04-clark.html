@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TM-04 CLARK — Cycloidal Robotic Arm · J. O. Jackson</title>
+<meta name="description" content="Technical memorandum: CLARK, a four-link, four-degree-of-freedom robotic arm with printed cycloidal gearboxes at every joint, designed, built, and debugged in seven days.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<article class="memo">
+
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Jack O. Jackson</a>
+    <a href="01-rov.html">TM-01 ROV</a>
+    <a href="02-perry.html">TM-02 PERRY</a>
+    <a href="03-doc-ock.html">TM-03 Doc Ock</a>
+    <a href="04-clark.html" aria-current="page">TM-04 CLARK</a>
+    <a href="pdf/TM-04-CLARK.pdf">PDF</a>
+  </nav>
+
+  <div class="runhead"><span>TM-04 · Rev A</span><span>J. O. Jackson · 2026-09-01</span></div>
+
+  <header>
+    <div class="kind">Technical Memorandum</div>
+    <h1>CLARK: A Four-Link Robotic Arm with Printed Cycloidal Gearboxes, Built in Seven Days</h1>
+    <div class="sub">Cycloidal Linked Arm with Rotation and Kinematics</div>
+    <div class="authors">J. O. Jackson<small>Engineering Renaissance Club, Clovis Community College</small></div>
+
+    <p class="abstract"><b>Abstract.</b> CLARK is a four-link, four-degree-of-freedom arm in which every joint is driven through a custom FDM-printed cycloidal gearbox. An Xbox controller commands an ESP32 over UDP, which drives four NEMA17 steppers through TMC2209 drivers. Design, printing, soldering, assembly, and debugging were completed in seven days. All four degrees of freedom were functional, and the arm became the live demonstration piece for club recruiting. The author laid out and assembled the driver board, wrote the firmware, and contributed to the gearbox design.</p>
+  </header>
+
+  <section>
+    <h2><span class="n">1</span>Cycloidal Reduction</h2>
+    <p>A cycloidal drive was chosen over planetary and harmonic alternatives because it gives high torque density and low backlash in a package that prints cleanly: a single eccentric input, a lobed disc, and a ring of pins, with no small gear teeth to lose in the FDM process. Each of the four joints carries its own custom-designed cycloidal gearbox for torque multiplication.</p>
+    <figure class="fig pending">
+      <div class="box">Figure slot: exploded view of one cycloidal gearbox.</div>
+      <figcaption class="cap"><b>Figure 1.</b> One joint gearbox, exploded: eccentric input, cycloidal disc, pin ring, output.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span>Mechanical Design</h2>
+    <p>Four links, four joints, each joint a gearbox and a NEMA17. All structure and gearbox parts were printed in ABS on Bambu Lab machines.</p>
+    <figure class="fig pending">
+      <div class="box">Figure slot: assembled arm.</div>
+      <figcaption class="cap"><b>Figure 2.</b> CLARK, assembled, all four joints.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span>Electronics and Firmware</h2>
+    <p>An ESP32 receives commands from an Xbox controller over UDP on WiFi and drives the four TMC2209 stepper drivers. The driver board was laid out and assembled by the author on protoboard with through-hole soldering. Firmware was written in the Arduino IDE.</p>
+    <div class="tabwrap">
+      <table>
+        <caption><b>Table 1.</b> System summary.</caption>
+        <thead><tr><th>Subsystem</th><th>Component</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Joints</td><td>4× printed cycloidal gearbox</td><td>ABS, Bambu Lab FDM</td></tr>
+          <tr><td>Actuators</td><td>4× NEMA17 stepper</td><td>one per joint</td></tr>
+          <tr><td>Drivers</td><td>4× TMC2209</td><td>on a hand-assembled protoboard</td></tr>
+          <tr><td>Controller</td><td>ESP32</td><td>Arduino IDE</td></tr>
+          <tr><td>Operator input</td><td>Xbox controller</td><td>UDP over WiFi</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span>Build and Outcome</h2>
+    <p>Design, printing, soldering, assembly, and debugging were completed in seven days. All four degrees of freedom were achieved and functional. The arm was then used as a live demonstration piece for Engineering Renaissance Club outreach, drawing new members into the club.</p>
+    <p>CLARK was the first project on which the author carried CAD, fabrication, electronics, firmware, and Gantt-chart scheduling end to end.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span>Known Limitations</h2>
+    <ul>
+      <li>Cycloidal reduction ratio, joint torque, and arm reach were not recorded in this memorandum.</li>
+      <li>The number of members recruited from the demonstration was not recorded.</li>
+      <li>Backlash and load capacity were not measured.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span>Role and Attribution</h2>
+    <p>The author laid out and assembled the driver board on protoboard, wrote the full firmware, and contributed to the cycloidal gearbox design. Club project, Engineering Renaissance Club.</p>
+  </section>
+
+  <footer class="pgfoot"><span>CLARK · TM-04 · Rev A · 2026-09-01</span><span>J. O. Jackson</span></footer>
+
+</article>
+</body>
+</html>
