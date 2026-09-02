@@ -26,7 +26,7 @@
     <div class="sub">Cycloidal Linked Arm with Rotation and Kinematics</div>
     <div class="authors">J. O. Jackson<small>Engineering Renaissance Club, Clovis Community College</small></div>
 
-    <p class="abstract"><b>Abstract.</b> CLARK is a four-link, four-degree-of-freedom arm in which every joint is driven through a custom FDM-printed 20:1 cycloidal gearbox. An Xbox controller commands an ESP32 over UDP, which drives four NEMA17 steppers through TMC2209 drivers, open-loop. Design, printing, soldering, assembly, and debugging were completed in five days. The arm reaches about 0.9&nbsp;m and lifted roughly 4.5&nbsp;kg before a joint motor stalled. It became the live demonstration piece at club rush, where about 50 people signed up. The author laid out and assembled the driver board, wrote the firmware, and contributed to the gearbox design.</p>
+    <p class="abstract"><b>Abstract.</b> CLARK is a four-link, four-degree-of-freedom arm in which every joint is driven through a custom FDM-printed 20:1 cycloidal gearbox. An Xbox controller commands an ESP32 over UDP, which drives four NEMA17 steppers through TMC2209 drivers, open-loop. Design, printing, soldering, assembly, and debugging were completed in five days. The arm reaches about 0.9&nbsp;m and lifted about 10&nbsp;lb (4.5&nbsp;kg) before a joint motor stalled. It became the live demonstration piece at club rush, where about 50 people signed up. The author laid out and assembled the driver board, wrote the firmware, and contributed to the gearbox design.</p>
   </header>
 
   <section>
@@ -48,7 +48,7 @@
 
   <section>
     <h2><span class="n">3</span>Electronics and Firmware</h2>
-    <p>An ESP32 receives commands from an Xbox controller over UDP on WiFi and drives the four TMC2209 stepper drivers. Joints run open-loop on step counts: joint sensing was planned, and dropped when the build timeline made open-loop the right call for a working demonstration. The driver board was laid out and assembled by the author on protoboard with through-hole soldering. Firmware was written in the Arduino IDE.</p>
+    <p>An ESP32 receives commands from an Xbox controller over UDP on Wi-Fi and drives the four TMC2209 stepper drivers. Joints run open-loop on step counts: joint sensing was planned and dropped when the build timeline made open-loop the right call for a working demonstration. The driver board was laid out and assembled by the author on protoboard with through-hole soldering. Firmware was written in the Arduino IDE.</p>
     <div class="tabwrap">
       <table>
         <caption><b>Table 1.</b> System summary.</caption>
@@ -58,9 +58,9 @@
           <tr><td>Actuators</td><td>4× NEMA17 stepper</td><td>one per joint, open-loop</td></tr>
           <tr><td>Drivers</td><td>4× TMC2209</td><td>on a hand-assembled protoboard</td></tr>
           <tr><td>Controller</td><td>ESP32</td><td>Arduino IDE</td></tr>
-          <tr><td>Operator input</td><td>Xbox controller</td><td>UDP over WiFi</td></tr>
+          <tr><td>Operator input</td><td>Xbox controller</td><td>UDP over Wi-Fi</td></tr>
           <tr><td>Reach</td><td>about 0.9 m</td><td>full extension</td></tr>
-          <tr><td>Lift</td><td>roughly 4.5 kg</td><td>before a joint motor stalled; not a formal test</td></tr>
+          <tr><td>Lift</td><td>about 10 lb (4.5 kg)</td><td>before a joint motor stalled; not a formal test</td></tr>
         </tbody>
       </table>
     </div>
@@ -77,7 +77,7 @@
     <ul>
       <li>Joint torque and backlash were not measured. The lift figure is the load at which one motor stalled, observed once, not a rated capacity.</li>
       <li>No joint position sensing; the arm has no way to detect a missed step.</li>
-      <li>Reach and mass figures are approximate; the arm was not measured formally.</li>
+      <li>Reach and lift figures are approximate; the arm was not measured formally.</li>
     </ul>
   </section>
 
