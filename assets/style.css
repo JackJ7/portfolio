@@ -217,6 +217,64 @@ ol.refs li { margin-bottom: 5px; }
 }
 
 /* --------------------------------------------------------------------------
+   Landing page: one-page CV skeleton. Same paper and face as the memos,
+   different bones: left-aligned name with a rule, label column on the left,
+   content on the right. No kind label, no abstract, no running head.
+   -------------------------------------------------------------------------- */
+
+.cv-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+  border-bottom: 1pt solid var(--rule);
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+}
+.cv-head h1 { font-size: 30px; text-align: left; margin: 0; line-height: 1.1; }
+.cv-head .contact { font-size: 14.5px; text-align: right; line-height: 1.45; }
+.cv-head .contact a { display: block; }
+.cv-tagline { font-size: 15.5px; font-style: italic; color: var(--ink-soft); margin-bottom: 22px; }
+
+.cv-sec { margin-top: 20px; }
+.cv-sec h2 {
+  font-size: 15.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 0.5pt solid var(--rule);
+  padding-bottom: 3px;
+  margin-bottom: 10px;
+}
+.cv-row {
+  display: grid;
+  grid-template-columns: 1.55in 1fr;
+  gap: 2px 18px;
+  margin-bottom: 9px;
+}
+.cv-row:last-child { margin-bottom: 0; }
+.cv-row .lbl { font-size: 14.5px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.cv-row .lbl b { color: var(--ink); font-weight: 700; }
+.cv-row .body { min-width: 0; }
+.cv-row .body p { text-align: left; hyphens: manual; margin-bottom: 3px; }
+.cv-row .body .role { font-weight: 700; }
+.cv-row .body .meta { font-size: 14.5px; color: var(--ink-soft); }
+.cv-sec p.lead { text-align: left; hyphens: manual; margin-bottom: 0; }
+
+@media (max-width: 720px) {
+  .cv-head { align-items: flex-start; }
+  .cv-head .contact { text-align: left; }
+  .cv-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 12px; }
+}
+
+@media print {
+  .cv-head h1 { font-size: 22pt; }
+  .cv-sec h2 { font-size: 11pt; }
+  .cv-row .lbl, .cv-row .body .meta, .cv-head .contact { font-size: 9.5pt; }
+  .cv-sec { break-inside: avoid; }
+}
+
+/* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
 

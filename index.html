@@ -3,60 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>J. O. Jackson — Technical Memoranda</title>
-<meta name="description" content="Technical memoranda by Jack O. Jackson, mechanical engineering (robotics and controls), UC Irvine. Competition ROV, profiling float, and further projects in preparation.">
+<title>Jack O. Jackson</title>
+<meta name="description" content="Jack O. Jackson, mechanical engineering (robotics and controls), UC Irvine. Technical memoranda on a competition ROV, a vertical profiling float, and further projects.">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<article class="memo">
+<article class="memo cv">
 
-  <nav class="site-nav" aria-label="Memorandum index">
+  <nav class="site-nav" aria-label="Site">
     <a href="index.html" aria-current="page">Index</a>
     <a href="01-rov.html">TM-01 ROV</a>
     <a href="02-perry.html">TM-02 PERRY</a>
   </nav>
 
-  <div class="runhead"><span>TM-00 · Rev A</span><span>J. O. Jackson · 2026-08-27</span></div>
-
-  <header>
-    <div class="kind">Technical Memoranda</div>
+  <header class="cv-head">
     <h1>Jack O. Jackson</h1>
-    <div class="sub">Mechanical Engineering, Robotics and Controls · UC Irvine, Fall 2026</div>
-    <div class="authors"><a href="mailto:jackoj@uci.edu">jackoj@uci.edu</a><small><a href="https://linkedin.com/in/jackjackson2">linkedin.com/in/jackjackson2</a></small></div>
-
-    <p class="abstract"><b>Summary.</b> This series documents the author's engineering projects in the form of short technical memoranda. Each memorandum records the design, what was measured, and what was not. Two are issued; three are in preparation.</p>
+    <div class="contact">
+      <a href="mailto:jackoj@uci.edu">jackoj@uci.edu</a>
+      <a href="https://linkedin.com/in/jackjackson2">linkedin.com/in/jackjackson2</a>
+    </div>
   </header>
+  <p class="cv-tagline">Mechanical Engineering, Robotics and Controls · UC Irvine, from Fall 2026</p>
 
-  <section>
-    <h2><span class="n">1</span>Issued Memoranda</h2>
-    <div class="tabwrap">
-      <table>
-        <caption><b>Table 1.</b> Memoranda issued to date.</caption>
-        <thead><tr><th>No.</th><th>Title</th><th>Subject</th><th>Result</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>TM-01</td>
-            <td><a href="01-rov.html">Crush Depth ROV</a></td>
-            <td>Underwater remotely operated vehicle</td>
-            <td>MATE ROV World Championship 2025 and 2026; Engineering Presentation MVP, 2026</td>
-          </tr>
-          <tr>
-            <td>TM-02</td>
-            <td><a href="02-perry.html">PERRY</a></td>
-            <td>Vertical profiling float</td>
-            <td>Profiled to 4&nbsp;m in open water, resurfaced, and transmitted logged data</td>
-          </tr>
-        </tbody>
-      </table>
+  <section class="cv-sec">
+    <p class="lead">I work on robots that have to survive their environment: pressure hulls, gear reductions, mechanisms, and the control loops that drive them. My degree is mechanical engineering. I also build the electronics and write the firmware, which means I can take a machine from CAD through board assembly to a working control loop and know where each part will fail. The memoranda below record what was built, what was measured, and what was not.</p>
+  </section>
+
+  <section class="cv-sec">
+    <h2>Education</h2>
+    <div class="cv-row">
+      <div class="lbl">from Fall 2026</div>
+      <div class="body"><p><span class="role">University of California, Irvine</span><br><span class="meta">B.S. Mechanical Engineering</span></p></div>
+    </div>
+    <div class="cv-row">
+      <div class="lbl">May 2026</div>
+      <div class="body"><p><span class="role">Clovis Community College</span><br><span class="meta">A.S. Mechanical Engineering, A.S. Civil Engineering, A.S. Electrical Engineering</span></p></div>
     </div>
   </section>
 
-  <section>
-    <h2><span class="n">2</span>In Preparation</h2>
-    <p>TM-03 Doc Ock (tendon-driven spiral gripper), TM-04 CLARK (cycloidal-gearbox robotic arm), and TM-05, a capability matrix across the series, will be added to this index in a later revision.</p>
+  <section class="cv-sec">
+    <h2>Projects</h2>
+    <div class="cv-row">
+      <div class="lbl"><b>TM-01</b></div>
+      <div class="body"><p><a href="01-rov.html">Crush Depth ROV</a> · underwater remotely operated vehicle<br><span class="meta">MATE ROV World Championship 2025 and 2026. Engineering Presentation MVP, 2026. Co-CEO / CTO; electrical and software domains.</span></p></div>
+    </div>
+    <div class="cv-row">
+      <div class="lbl"><b>TM-02</b></div>
+      <div class="body"><p><a href="02-perry.html">PERRY</a> · vertical profiling float<br><span class="meta">Profiled to 4&nbsp;m in open water, resurfaced, and transmitted logged data over LoRa. Programming, electronics, buoyancy.</span></p></div>
+    </div>
+    <div class="cv-row">
+      <div class="lbl"><b>TM-03</b></div>
+      <div class="body"><p>Doc Ock · tendon-driven spiral gripper<br><span class="meta">Memorandum in preparation.</span></p></div>
+    </div>
+    <div class="cv-row">
+      <div class="lbl"><b>TM-04</b></div>
+      <div class="body"><p>CLARK · cycloidal-gearbox robotic arm<br><span class="meta">Memorandum in preparation.</span></p></div>
+    </div>
   </section>
 
-  <footer class="pgfoot"><span>Index · TM-00 · Rev A</span><span>J. O. Jackson</span></footer>
+  <section class="cv-sec">
+    <h2>Leadership</h2>
+    <div class="cv-row">
+      <div class="lbl">Crush Depth</div>
+      <div class="body"><p><span class="role">Co-CEO / CTO</span><br><span class="meta">Co-manages a team of roughly 47 with Luke Salazar: Gantt scheduling, BOM management, outreach, final say in design alongside his counterpart. Owns the electrical and software domains and backfills any lead's workload to hold deadlines.</span></p></div>
+    </div>
+    <div class="cv-row">
+      <div class="lbl">Crush Depth</div>
+      <div class="body"><p><span class="role">Float Team Technical Lead</span> (prior role)<br><span class="meta">Led the float subteam through LoRa communications, ESP32 development, stepper motors and drivers, and board assembly.</span></p></div>
+    </div>
+    <div class="cv-row">
+      <div class="lbl">Engineering Renaissance Club</div>
+      <div class="body"><p><span class="role">Electrical Officer</span><br><span class="meta">Designed and ran two structured onboarding projects with the design officer, each with a scope-approval gate, a justified BOM, system integration diagrams, and scheduled check-ins, ending in presentations to the club.</span></p></div>
+    </div>
+  </section>
+
+  <section class="cv-sec">
+    <h2>Other</h2>
+    <div class="cv-row">
+      <div class="lbl">2024</div>
+      <div class="body"><p>NASA L'SPACE Mission Concept Academy: lunar far-side rover concept, 250-page mission concept document.</p></div>
+    </div>
+    <div class="cv-row">
+      <div class="lbl">2024, 2025</div>
+      <div class="body"><p>PODER peer mentor, summers.</p></div>
+    </div>
+    <div class="cv-row">
+      <div class="lbl">2+ years</div>
+      <div class="body"><p>Clovis Community College tutor, about 19 hours per week.</p></div>
+    </div>
+    <div class="cv-row">
+      <div class="lbl"></div>
+      <div class="body"><p>FRC alum. Valley STEM. Beautify Fresno. Volunteer assistant coach, girls' soccer.</p></div>
+    </div>
+  </section>
+
+  <footer class="pgfoot"><span>J. O. Jackson · Rev A · 2026-09-01</span><span>jackj7.github.io/portfolio</span></footer>
 
 </article>
 </body>
