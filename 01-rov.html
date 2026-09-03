@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TM-01 Crush Depth ROV · J. O. Jackson</title>
-<meta name="description" content="Technical memorandum: Crush Depth ROV, an underwater remotely operated vehicle for the MATE ROV World Championship. Eight T200 thrusters, four cameras in SLA-printed housings, 48 V tether, printed chassis, pilot-first control architecture.">
+<meta name="description" content="Technical memorandum: Crush Depth ROV, an underwater remotely operated vehicle for the MATE ROV World Championship. Eight T200 thrusters, four cameras in SLA-printed housings, 48 V tether with system interconnect diagram, printed chassis, pilot-first control architecture.">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
     <a href="pdf/TM-01-ROV.pdf">PDF</a>
   </nav>
 
-  <div class="runhead"><span>TM-01 · Rev C</span><span>J. O. Jackson · 2026-09-02</span></div>
+  <div class="runhead"><span>TM-01 · Rev D</span><span>J. O. Jackson · 2026-09-03</span></div>
 
   <header>
     <div class="kind">Technical Memorandum</div>
@@ -45,7 +45,11 @@
 
   <section>
     <h2><span class="n">2</span>Electronics and Power</h2>
-    <p>A Raspberry Pi 5 is the vehicle computer. It drives eight Blue Robotics T200 thrusters through ESCs via a PCA9685 PWM driver, reads an MPU6050 IMU for attitude sensing, and carries four camera feeds for the pilot. The tether delivers 48&nbsp;V DC; multiple buck converters step it down to the rails the electronics need.</p>
+    <p>A Raspberry Pi 5 is the vehicle computer. It drives eight Blue Robotics T200 thrusters through ESCs via a PCA9685 PWM driver, reads an MPU6050 IMU for attitude sensing, and carries four camera feeds for the pilot. The tether delivers 48&nbsp;V DC from a 30&nbsp;A supply through a 30&nbsp;A fuse; two 48-to-12&nbsp;V 40&nbsp;A converters feed the thruster ESCs through power distribution boards, with a 3&nbsp;×&nbsp;1000&nbsp;µF capacitor bank on each, and a separate 48-to-12&nbsp;V 5&nbsp;A converter and 12-to-5&nbsp;V 5&nbsp;A converter carry the Pi and its peripherals. Two UBECs supply the manipulator servos at 6&nbsp;V. The fuse was sized from a calculated full-load current of 26.25&nbsp;A in water. Figure&nbsp;2 is the system interconnect diagram the author drew for the 2026 vehicle.</p>
+    <figure class="fig">
+      <img src="assets/img/rov-sid.png" alt="System interconnect diagram of the 2026 ROV: 48 V supply and fuse, converters, power distribution boards, eight ESCs, Raspberry Pi 5 with sensors, PCA9685, servos, and the surface laptop and controllers." width="1665" height="1039">
+      <figcaption class="cap"><b>Figure 2.</b> System interconnect diagram, 2026 vehicle, drawn by the author. Red: power; black: ground; yellow: signal; blue: Ethernet; green: ESC output. Full-load current of 26.25&nbsp;A at 48&nbsp;V is calculated from component ratings, not measured.</figcaption>
+    </figure>
     <div class="tabwrap">
       <table>
         <caption><b>Table 1.</b> System summary.</caption>
@@ -55,7 +59,8 @@
           <tr><td>Propulsion</td><td>8× Blue Robotics T200</td><td>ESCs via PCA9685 PWM driver</td></tr>
           <tr><td>Attitude</td><td>MPU6050 IMU</td><td>—</td></tr>
           <tr><td>Vision</td><td>4× camera</td><td>SLA-printed waterproof cases on FDM mounts</td></tr>
-          <tr><td>Power</td><td>48 V DC tether</td><td>buck converters to multiple rails</td></tr>
+          <tr><td>Power</td><td>48 V DC tether, 30 A supply, 30 A fuse</td><td>calculated full load 26.25 A</td></tr>
+          <tr><td>Conversion</td><td>2× 48–12 V 40 A; 48–12 V 5 A; 12–5 V 5 A; 2× UBEC 12–6 V</td><td>thrusters, Pi, servos</td></tr>
           <tr><td>Structure</td><td>FDM chassis, housing, TPU ballast</td><td>SolidWorks; Bambu Lab printers</td></tr>
           <tr><td>End effector</td><td>custom manipulator</td><td>designed against mission tasks</td></tr>
         </tbody>
@@ -77,13 +82,13 @@
   <section>
     <h2><span class="n">5</span>Known Limitations</h2>
     <ul>
-      <li>The vehicle's total power budget was never formally characterized; converter sizing was validated by operation, not analysis.</li>
+      <li>The power budget is calculated, not measured: the 26.25&nbsp;A full-load figure comes from component ratings, and no current draw was logged in operation. Converter sizing was validated by operation.</li>
       <li>Manipulator payload capacity is unquantified.</li>
       <li>The hardware is currently not accessible to the author; this memorandum is limited to what was documented at build time.</li>
     </ul>
   </section>
 
-  <footer class="pgfoot"><span>Crush Depth ROV · TM-01 · Rev C · 2026-09-02</span><span>J. O. Jackson</span></footer>
+  <footer class="pgfoot"><span>Crush Depth ROV · TM-01 · Rev D · 2026-09-03</span><span>J. O. Jackson</span></footer>
 
 </article>
 </body>
