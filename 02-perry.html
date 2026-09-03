@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TM-02 PERRY — Vertical Profiling Float · J. O. Jackson</title>
-<meta name="description" content="Technical memorandum: PERRY, a LoRa-activated vertical profiling float. O-ring sealed, acetone-vapor-smoothed ABS hull; silicone grease after marine grease failed in the field; 50 mL buoyancy engine. Verified to 4 m in open water.">
+<meta name="description" content="Technical memorandum: PERRY, a LoRa-activated vertical profiling float. O-ring sealed, acetone-vapor-smoothed ABS hull; silicone grease after marine grease failed in the field; 50 mL buoyancy engine under PID depth control on Bar02 depth. Verified to 4 m in open water.">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
     <a href="pdf/TM-02-PERRY.pdf">PDF</a>
   </nav>
 
-  <div class="runhead"><span>TM-02 · Rev C</span><span>J. O. Jackson · 2026-09-02</span></div>
+  <div class="runhead"><span>TM-02 · Rev D</span><span>J. O. Jackson · 2026-09-03</span></div>
 
   <header>
     <div class="kind">Technical Memorandum</div>
@@ -26,7 +26,7 @@
     <div class="sub">Pressure Equipped Robot for Research and Yield</div>
     <div class="authors">J. O. Jackson<small>Crush Depth float team, MATE ROV international competition</small></div>
 
-    <p class="abstract"><b>Abstract.</b> PERRY is a vertical profiling float: on a LoRa activation signal it runs three profiles to a set depth, logging temperature, pressure, and depth, and transmits the record on resurfacing. The hull is acetone-vapor-smoothed ABS closed by static o-rings; field testing showed marine grease admitting water at the seals, and the switch to silicone grease fixed it. A 50&nbsp;mL buoyancy engine moves the craft, which has a mass of about 10&nbsp;lb (4.5&nbsp;kg). In open water it profiled to 4&nbsp;m, resurfaced, and returned its data. The author owned the programming, the electronics, and the buoyancy design on a team build.</p>
+    <p class="abstract"><b>Abstract.</b> PERRY is a vertical profiling float: on a LoRa activation signal it runs three profiles to a set depth, logging temperature, pressure, and depth, and transmits the record on resurfacing. The hull is acetone-vapor-smoothed ABS closed by static o-rings; field testing showed marine grease admitting water at the seals, and the switch to silicone grease fixed it. A 50&nbsp;mL buoyancy engine moves the craft, which has a mass of about 10&nbsp;lb (4.5&nbsp;kg); depth is held by a PID controller on Bar02 depth with hand-set gains. In open water it profiled to 4&nbsp;m, resurfaced, and returned its data. The author owned the programming, the electronics, and the buoyancy design on a team build.</p>
   </header>
 
   <section>
@@ -45,11 +45,16 @@
 
   <section>
     <h2><span class="n">2</span>Buoyancy Engine</h2>
-    <p>Depth is driven by a buoyancy engine rather than thrusters. A NEMA17 stepper motor, running through a TMC2209 driver under UART control, changes the craft's displacement by 50&nbsp;mL to move it between the surface and the target depth. The craft has a mass of about 10&nbsp;lb (4.5&nbsp;kg). The 50&nbsp;mL allowance was set by estimate against that mass and confirmed by trial rather than by a formal buoyancy calculation; that is recorded as a limitation in Section&nbsp;5.</p>
+    <p>Depth is driven by a buoyancy engine rather than thrusters. A NEMA17 stepper motor, running through a TMC2209 driver under UART control, changes the craft's displacement by 50&nbsp;mL to move it between the surface and the target depth. The craft has a mass of about 10&nbsp;lb (4.5&nbsp;kg). The 50&nbsp;mL allowance was set by estimate against that mass and confirmed by trial rather than by a formal buoyancy calculation; that is recorded as a limitation in Section&nbsp;6.</p>
   </section>
 
   <section>
-    <h2><span class="n">3</span>Electronics and Firmware</h2>
+    <h2><span class="n">3</span>Depth Control</h2>
+    <p>Depth is closed-loop. The ESP32 reads depth from the Bar02 and runs a PID controller against the target depth; the controller output commands the buoyancy engine's displacement through the stepper. The gains were set by hand. The schedule did not leave time for a tuning campaign, so the loop was run with guessed gains adjusted by trial until the craft reached and held the 4&nbsp;m target well enough to complete the mission. Overshoot, settling time, and steady-state error were not recorded. This loop is the only feedback control on the craft; profile sequencing and the transmit step run open-loop on mission logic.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span>Electronics and Firmware</h2>
     <p>An ESP32 runs the mission logic: arming over LoRa, profile sequencing, sensor logging, and data return. Depth and pressure are read from a Blue Robotics Bar02 pressure sensor on the I²C bus. The LoRa link is a REYAX RYLR896 module on a 115200-baud UART. The stepper driver is commanded over a second UART. All electronics were assembled and soldered on protoboard.</p>
     <div class="tabwrap">
       <table>
@@ -59,6 +64,7 @@
           <tr><td>Controller</td><td>ESP32</td><td>mission logic, logging, radio</td></tr>
           <tr><td>Pressure and depth</td><td>Blue Robotics Bar02</td><td>I²C</td></tr>
           <tr><td>Depth drive</td><td>NEMA17 stepper, TMC2209 driver</td><td>UART; 50 mL displacement change</td></tr>
+          <tr><td>Depth control</td><td>PID on Bar02 depth</td><td>gains set by hand, not tuned</td></tr>
           <tr><td>Radio</td><td>REYAX RYLR896 LoRa</td><td>UART, 115200 baud</td></tr>
           <tr><td>Hull</td><td>FDM ABS, Bambu Lab printer</td><td>chamber vapor smoothed; static o-rings; silicone grease</td></tr>
           <tr><td>Mass</td><td>about 10 lb (4.5 kg)</td><td>—</td></tr>
@@ -69,8 +75,8 @@
   </section>
 
   <section>
-    <h2><span class="n">4</span>Open-Water Verification</h2>
-    <p>The craft completed its mission profile in open water: it profiled to 4&nbsp;m, resurfaced, and delivered its logged data over the radio link. Figure&nbsp;2 shows the commanded mission profile. The logged dataset itself was not retained (Section&nbsp;5), so no measured profile is reproduced here.</p>
+    <h2><span class="n">5</span>Open-Water Verification</h2>
+    <p>The craft completed its mission profile in open water: it profiled to 4&nbsp;m, resurfaced, and delivered its logged data over the radio link. Figure&nbsp;2 shows the commanded mission profile. The logged dataset itself was not retained (Section&nbsp;6), so no measured profile is reproduced here.</p>
     <figure class="fig">
       <svg viewBox="0 0 640 300" role="img" aria-label="Commanded mission profile: three descents from the surface to 4 metres and back.">
         <rect x="0" y="0" width="640" height="300" fill="#fff"/>
@@ -102,12 +108,13 @@
   </section>
 
   <section>
-    <h2><span class="n">5</span>Known Limitations</h2>
+    <h2><span class="n">6</span>Known Limitations</h2>
     <ul>
       <li>Seal integrity is verified to 4&nbsp;m only. Maximum safe operating depth has not been characterized.</li>
       <li>The buoyancy engine's 50&nbsp;mL allowance was set by estimate and checked by trial, not by a formal buoyancy budget. Displacement was not measured.</li>
       <li>The o-ring groove dimensions and the original design files were not retained.</li>
       <li>The logged dataset from the mission was not retained; the record of the profile is the mission outcome, not the data.</li>
+      <li>PID gains were set by hand and adjusted by trial, not tuned by a method. Overshoot, settling time, and steady-state error at the 4&nbsp;m target were not recorded.</li>
       <li>Effective LoRa range was not measured; the link is verified only at mission distances.</li>
       <li>Sensor sample rate was not formally recorded.</li>
       <li>Single Bar02 sensor with no redundancy; a sensor fault ends the mission.</li>
@@ -115,11 +122,11 @@
   </section>
 
   <section>
-    <h2><span class="n">6</span>Role and Attribution</h2>
+    <h2><span class="n">7</span>Role and Attribution</h2>
     <p>Team project, Crush Depth float team. The author owned the programming, the electronics, and the physics and buoyancy side of the craft, and previously served as Float Team Technical Lead, taking the subteam through LoRa communications, ESP32 development, stepper motors and drivers, and board assembly.</p>
   </section>
 
-  <footer class="pgfoot"><span>PERRY · TM-02 · Rev C · 2026-09-02</span><span>J. O. Jackson</span></footer>
+  <footer class="pgfoot"><span>PERRY · TM-02 · Rev D · 2026-09-03</span><span>J. O. Jackson</span></footer>
 
 </article>
 </body>

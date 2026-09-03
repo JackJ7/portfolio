@@ -260,6 +260,17 @@ ol.refs li { margin-bottom: 5px; }
 .cv-row:last-child { margin-bottom: 0; }
 .cv-row .lbl { font-size: 14.5px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 .cv-row .lbl b { color: var(--ink); font-weight: 700; }
+.cv-row .lbl img.thumb {
+  display: block;
+  width: 100%;
+  max-width: 1.55in;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%);
+  margin-top: 6px;
+  border: 0.5pt solid var(--rule);
+}
 .cv-row .body { min-width: 0; }
 .cv-row .body p { text-align: left; hyphens: manual; margin-bottom: 3px; }
 .cv-row .body .role { font-weight: 700; }
@@ -281,6 +292,7 @@ ol.refs li { margin-bottom: 5px; }
   .cv-sec { margin-top: 8px; break-inside: avoid; }
   .cv-sec h2 { font-size: 10pt; margin-bottom: 5px; padding-bottom: 2px; }
   .cv-row { margin-bottom: 3px; grid-template-columns: 1.25in 1fr; }
+  .cv-row .lbl img.thumb { display: none; }
   .cv-row .body p { margin-bottom: 0; }
   .cv-row .lbl, .cv-row .body .meta, .cv-head .contact { font-size: 8.7pt; }
   .cv .pgfoot { margin-top: 14px; }
